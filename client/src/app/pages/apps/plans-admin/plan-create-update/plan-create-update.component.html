@@ -1,0 +1,53 @@
+<div class="register-container">
+  <div class="register-body">
+    <form [formGroup]="form" (ngSubmit)="save()" id="ngForm" #documentEditForm="ngForm">
+      <h2 mat-dialog-title>{{titlePanel}}</h2>
+      <h4 class="subtitle-register">Ingrese la información</h4>
+      
+      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+        <mat-form-field fxFlex="grow" appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput required formControlName="name" required>
+          <mat-error *ngIf="form.get('name').hasError('required')">Campo obligatorio</mat-error>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+        <mat-form-field fxFlex="grow" appearance="outline">
+          <mat-label>Creditos</mat-label>
+          <input matInput required formControlName="credits" (keypress)="onlyNumbers($event)" required>
+          <mat-error *ngIf="form.get('credits').hasError('required')">Campo obligatorio</mat-error>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+        <mat-form-field fxFlex="grow" appearance="outline">
+          <mat-label>Valor mes</mat-label>
+          <input matInput required formControlName="month_value" (keypress)="onlyNumbers($event)" required>
+          <mat-error *ngIf="form.get('month_value').hasError('required')">Campo obligatorio</mat-error>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+        <mat-form-field fxFlex="grow" appearance="outline">
+          <mat-label>Valor año</mat-label>
+          <input matInput required formControlName="year_value" (keypress)="onlyNumbers($event)" required>
+          <mat-error *ngIf="form.get('year_value').hasError('required')">Campo obligatorio</mat-error>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+        <mat-form-field fxFlex="grow" appearance="outline">
+          <mat-label>Checks adicionales</mat-label>
+          <input matInput required formControlName="additional" (keypress)="onlyNumbers($event)" required>
+          <mat-error *ngIf="form.get('additional').hasError('required')">Campo obligatorio</mat-error>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+        <mat-form-field fxFlex="grow" appearance="outline">
+          <mat-label>Valor por check adicional</mat-label>
+          <input matInput required formControlName="additional_value" (keypress)="onlyNumbers($event)" required>
+          <mat-error *ngIf="form.get('additional_value').hasError('required')">Campo obligatorio</mat-error>
+        </mat-form-field>
+      </div>
+      
+      
+    </form>
+  </div>
+</div>

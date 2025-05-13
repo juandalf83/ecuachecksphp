@@ -1,0 +1,69 @@
+<div class="dashboard">
+  <fury-header-plan></fury-header-plan>
+  <div class="padding container-box">
+    <div class="header-box">
+      <div class="title-box">Mi equipo</div>
+      <div class="subtitle-box">Gestiona los usuarios para tu equipo de trabajo.</div>
+    </div>
+    <div class="elevation border-radius route-animations-elements" style="margin-bottom: 50px;">
+      <fury-list [columns]="columns" (filterChange)="onFilterChange($event)">
+        <div class="actions">
+          <button class="create" (click)="createUser()" type="button" class="btn-black" 
+            mat-mini-fab color="primary"
+            *ngIf="this.userLogger.rol_id == '1' || this.userLogger.rol_id == '2'">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+
+        <mat-table #table [dataSource]="dataSource" matSort>
+          <ng-container *ngFor="let column of columns">
+            <ng-container *ngIf="column.isModelProperty && column.property != 'nombres'" [matColumnDef]="column.property">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.name }}</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row[column.property] }}
+              </mat-cell>
+            </ng-container>
+            <ng-container *ngIf="column.property == 'nombres'" [matColumnDef]="column.property">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.name }}</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <div class="margin-section">
+                  <div class="item-row-principal">{{ row['nombres'] }}</div>
+                  <div class="item-row-secondary">{{ row['ci'] }}</div>
+                </div>
+              </mat-cell>
+            </ng-container>
+          </ng-container>
+          <!-- actions Column -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <span class="fury-mobile-label"></span>
+              <button type="button" mat-icon-button [matMenuTriggerFor]="actionsMenu" (click)="$event.stopPropagation()">
+                <mat-icon>more_horiz</mat-icon>
+              </button>
+
+              <mat-menu #actionsMenu="matMenu" yPosition="below" xPosition="before">
+                <button (click)="updateUser(row)" mat-menu-item *ngIf="row['status'] == 1">
+                  <span>Actualizar</span>
+                </button>
+                <button (click)="deleteUser(row)" mat-menu-item *ngIf="userLogger.rol_id == 1 || userLogger.rol_id == 2">
+                  <span *ngIf="row['status'] == 1">Inactivar</span>
+                  <span *ngIf="row['status'] == 0">Reactivar</span>
+                </button>
+                <button (click)="resetPassUser(row)" mat-menu-item *ngIf="(userLogger.rol_id == 1 || userLogger.rol_id == 2) && row['status'] == 1">
+                  <span>Resetear clave</span>
+                </button>
+              </mat-menu>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="visibleColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: visibleColumns;" (click)="updateUser(row)"
+                    class="clickable route-animations-elements" [ngClass]="row['cssStatus']"></mat-row>
+        </mat-table>
+        <mat-paginator class="paginator" [pageSize]="pageSize"></mat-paginator>
+      </fury-list>
+    </div>
+  </div>
+</div>
+

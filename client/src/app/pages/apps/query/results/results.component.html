@@ -1,0 +1,314 @@
+<div *ngIf="option">
+  <div class="title-result">{{option.name}}</div>
+  <div class="subtitle-result">El resultado de su consulta es el siguiente:</div>
+  <div class="form-result">
+    <div *ngIf="option.field == 'criminal_record'">
+      <div class="item-result">
+        <div class="label-result">Nombre:</div>
+        <div class="value-result">{{resultOption.criminal_record.name}}</div>
+      </div>
+      <div class="item-result">
+        <div class="label-result">Tipo de documento:</div>
+        <div class="value-result">{{resultOption.criminal_record.document_type}}</div>
+      </div>
+      <div class="item-result">
+        <div class="label-result">Número de documento:</div>
+        <div class="value-result">{{resultOption.criminal_record.document_number}}</div>
+      </div>
+      <div class="item-result">
+        <div class="label-result">Posee antecedentes:</div>
+        <div class="value-result">{{resultOption.criminal_record.has_background}}</div>
+      </div>
+    </div>
+    <div *ngIf="option.field == 'min_interior'">
+      <div *ngFor="let item of resultOption[option.field]; last as isLast" style="margin-bottom: 20px;">
+        <div class="item-result">
+          <div class="label-result">Apellido(s) y nombre(s):</div>
+          <div class="value-result">{{item.name}}</div>
+        </div>
+        <div class="item-result">
+          <div class="label-result">Tipo de documento:</div>
+          <div class="value-result">{{item.id_number}}</div>
+        </div>
+        <div class="item-result">
+          <div class="label-result">Documento:</div>
+          <div class="value-result">{{item.doc_type}}</div>
+        </div>
+        <div class="item-result">
+          <div class="label-result">Tiene impedimento:</div>
+          <div class="value-result">{{item.background}}</div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="option.field == 'supa'">
+      <div *ngFor="let item of resultOption[option.field]; last as isLast" style="margin-bottom: 20px;">
+        <div class="item-result">
+          <div class="label-result">Código de tarjeta:</div>
+          <div class="value-result">{{item.card_code}}</div>
+        </div>
+        <div class="item-result">
+          <div class="label-result">No. de proceso judicial:</div>
+          <div class="value-result">{{item.judicial_process}}</div>
+        </div>
+        <div class="item-result">
+          <div class="label-result">Dependencia jurisdiccional:</div>
+          <div class="value-result">{{item.jurisdictional_depency}}</div>
+        </div>
+        <div class="item-result">
+          <div class="label-result">Tipo de pensión:</div>
+          <div class="value-result">{{item.type_alimony}}</div>
+        </div>
+        <div>
+          <div class="item-result">
+            <div class="label-result">Representante Legal:</div>
+            <div class="value-result">{{item.legal_representative}}</div>
+          </div>
+          <div class="item-result">
+            <div class="label-result">Obligado principal:</div>
+            <div class="value-result">{{item.primary_obligator}}</div>
+          </div>
+          <div class="divider-result" *ngIf="!isLast"></div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="option.field == 'sri'">
+      <div *ngFor="let item of resultOption[option.field]" style="margin-bottom: 20px;">
+        <div class="item-result">
+          <div class="label-result">RUC / Cédula:</div>
+          <div class="value-result">{{item.cedula}}</div>
+        </div>
+        <!-- <div class="item-result">
+          <div class="label-result">Fecha de corte:</div>
+          <div class="value-result">{{resultOption.sri_obligations.cutoff_date}}</div>
+        </div> -->
+        <div class="item-result">
+          <div class="label-result">Razón social / Apellidos y nombres:</div>
+          <div class="value-result">{{item.full_name}}</div>
+        </div>
+        <div *ngIf="validDebts(item)">
+          <div class="item-result">
+            <div class="label-result">Deudas firmes:</div>
+            <div class="value-result">{{item.firm_debts}}</div>
+          </div>
+          <div class="item-result">
+            <div class="label-result">Deudas impugnadas:</div>
+            <div class="value-result">{{item.disputed_debts}}</div>
+          </div>
+          <div class="item-result">
+            <div class="label-result">Facilidades de pago:</div>
+            <div class="value-result">{{item.payment_facilities}}</div>
+          </div>
+        </div>
+        <div *ngIf="!validDebts(item)">
+          <div class="item-result">
+            <div class="label-result">Nota:</div>
+            <div class="value-result">
+              {{item.message}}
+            </div>
+          </div>
+        </div>
+        <!-- <hr> -->
+        <div *ngIf="resultOption[option.field].length > 1" class="divider-result"></div>
+      </div>
+    </div>
+    <div *ngIf="option.field == 'ant'">
+      <div class="item-result">
+        <div class="label-result">Nombres:</div>
+        <div class="value-result">{{resultOption[option.field][0].full_name}}</div>
+      </div>
+      <div class="item-result">
+        <div class="label-result">Cédula:</div>
+        <div class="value-result">{{resultOption[option.field][0].cedula}}</div>
+      </div>
+      <div class="item-result">
+        <div class="label-result">Licencia:</div>
+        <div class="value-result">
+          <table class="table-result">
+            <tr>
+              <td class="th-result">Tipo</td>
+              <td class="th-result">Fecha emisión</td>
+              <td class="th-result">Fecha expiración</td>
+              <td class="th-result">Puntos</td>
+              <td class="th-result">Total</td>
+            </tr>
+            <tr *ngFor="let license of resultOption[option.field]">
+              <td class="td-result">{{license.license_type}}</td>
+              <td class="td-result">{{license.expedition_date}}</td>
+              <td class="td-result">{{license.expiration_date}}</td>
+              <td class="td-result">{{license.points}}</td>
+              <td class="td-result">{{license.total}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="option.field == 'min_educacion'">
+      <div *ngIf="resultOption[option.field].length > 0">
+        <div *ngFor="let item of resultOption[option.field]; let indexI=index">
+          <div class="item-result">
+            <div class="label-result">No:</div>
+            <div class="value-result">{{item.no}}</div>
+          </div>
+          <div class="item-result">
+            <div class="label-result">N° de identificación:</div>
+            <div class="value-result">{{item.id_number}}</div>
+          </div>
+          <div class="item-result">
+            <div class="label-result">Nombre del titulado:</div>
+            <div class="value-result">{{item.full_name}}</div>
+          </div>
+          <div class="item-result">
+            <div class="label-result">Institución Educativa:</div>
+            <div class="value-result">{{item.college}}</div>
+          </div>
+          <div class="item-result">
+            <div class="label-result">Título:</div>
+            <div class="value-result">{{item.degree}}</div>
+          </div>
+          <div class="item-result">
+            <div class="label-result">Especialidad:</div>
+            <div class="value-result">{{item.speciality}}</div>
+          </div>
+          <div class="item-result">
+            <div class="label-result">Fecha Grado:</div>
+            <div class="value-result">{{item.graduation_date}}</div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="resultOption[option.field].length <= 0">
+        <div class="value-result">
+          No existe registro de título de bachiller u homologación de título de 
+          bachiller para los datos ingresados
+        </div>
+      </div>
+    </div>
+    <div *ngIf="option.field == 'senescyt'">
+      <div *ngFor="let register of resultOption[option.field]">
+        <div *ngIf="register.degress.length > 0">
+          <div *ngFor="let item of register.degress; last as isLast" style="margin-bottom: 20px;">
+            <div class="item-result">
+              <div class="label-result">Título:</div>
+              <div class="value-result">{{item.title}}</div>
+            </div>
+            <div class="item-result">
+              <div class="label-result">Institución de Educación Superior:</div>
+              <div class="value-result">{{item.college}}</div>
+            </div>
+            <div class="item-result">
+              <div class="label-result">Area:</div>
+              <div class="value-result">{{item.area}}</div>
+            </div>
+            <div class="item-result">
+              <div class="label-result">Tipo:</div>
+              <div class="value-result">{{item.type}}</div>
+            </div>
+            <div class="item-result">
+              <div class="label-result">Reconocido por:</div>
+              <div class="value-result">{{item.recognized}}</div>
+            </div>
+            <div class="item-result">
+              <div class="label-result">Número de registro:</div>
+              <div class="value-result">{{item.register_num}}</div>
+            </div>
+            <div class="item-result">
+              <div class="label-result">Fecha de Registro:</div>
+              <div class="value-result">{{item.register_date}}</div>
+            </div>
+            <div class="divider-result" *ngIf="!isLast"></div>
+          </div>
+        </div>
+        <div *ngIf="register.degress.length == 0">
+          <div class="value-result">
+            No se obtuvieron resultado para su criterio de búsqueda, en caso 
+            que este buscando por apellidos pruebe por el número de 
+            identificación ya sea cédula o pasaporte.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="option.field == 'expel' && option.section == 1">
+      <div *ngIf="resultOption['expel_demanding'].length > 0">
+        <div *ngFor="let item of resultOption['expel_demanding']; last as isLast">
+          <div class="item-result">
+            <div class="label-result">Fecha de ingreso:</div>
+            <div class="value-result">{{item.entry_date}}</div>
+          </div>
+          <div class="item-result">
+            <div class="label-result">Materia:</div>
+            <div class="value-result">{{item.matter}}</div>
+          </div>
+          <div class="item-result">
+            <div class="label-result">Delito/Asunto:</div>
+            <div class="value-result">{{item.crime_issue}}</div>
+          </div>
+          <div class="item-result">
+            <div class="label-result">Tipo de acción:</div>
+            <div class="value-result">{{item.action_type}}</div>
+          </div>
+          <div class="divider-result" *ngIf="!isLast"></div>
+        </div>
+      </div>
+      <div *ngIf="resultOption['expel_demanding'].length <= 0">
+        <div class="value-result">
+          No existe procesos como demandante
+        </div>
+      </div>
+    </div>
+    <div *ngIf="option.field == 'expel' && option.section == 2">
+      <div *ngIf="resultOption['expel_defendant'].length > 0">
+        <div *ngFor="let item of resultOption['expel_defendant']; last as isLast">
+          <div class="item-result">
+            <div class="label-result">Fecha de ingreso:</div>
+            <div class="value-result">{{item.entry_date}}</div>
+          </div>
+          <div class="item-result">
+            <div class="label-result">Materia:</div>
+            <div class="value-result">{{item.matter}}</div>
+          </div>
+          <div class="item-result">
+            <div class="label-result">Delito/Asunto:</div>
+            <div class="value-result">{{item.crime_issue}}</div>
+          </div>
+          <div class="item-result">
+            <div class="label-result">Tipo de acción:</div>
+            <div class="value-result">{{item.action_type}}</div>
+          </div>
+          <div class="divider-result" *ngIf="!isLast"></div>
+        </div>
+      </div>
+      <div *ngIf="resultOption['expel_defendant'].length <= 0">
+        <div class="value-result">
+          No existe procesos como demandante
+        </div>
+      </div>
+    </div>
+    <div *ngIf="option.field == 'fis_gen_estado'">
+      <div *ngIf="resultOption[option.field].length > 0">
+        <div *ngFor="let item of resultOption[option.field]; last as isLast">
+          <div class="item-result">
+            <div class="label-result">Noticia del delito:</div>
+            <div class="value-result">Nro: {{item.no_process}} - {{item.no_office}}</div>
+          </div>
+          <div class="item-result">
+            <div class="label-result">Lugar y fecha:</div>
+            <div class="value-result">{{item.place}} - {{item.date}}</div>
+          </div>
+          <div class="item-result">
+            <div class="label-result">Delito:</div>
+            <div class="value-result">{{item.crime}}</div>
+          </div>
+          <div class="item-result">
+            <div class="label-result">Estado:</div>
+            <div class="value-result">{{item.state}}</div>
+          </div>
+          <div class="divider-result" *ngIf="!isLast"></div>
+        </div>
+      </div>
+      <div *ngIf="resultOption[option.field].length <= 0">
+        <div class="value-result">
+          No existe denuncias
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

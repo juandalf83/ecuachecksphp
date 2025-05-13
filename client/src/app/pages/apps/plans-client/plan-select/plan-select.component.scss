@@ -1,0 +1,55 @@
+@import "var";
+
+.text-plan{
+  margin-bottom: 10px;
+}
+
+.text-credits{
+  color: #583ee2;
+  margin-bottom: 10px;
+}
+
+.text-price{
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.btn-blue{
+  background-color: #583ee2 !important;
+  color: #fff;
+  font-size: 0.9em;
+}
+
+.btn-blue:hover{
+  background-color: #593ee29d !important;
+}
+
+.btn-blue:disabled{
+  background-color: #d0cedac7 !important;
+}
+
+
+
+::ng-deep .ngx-slider-bar{
+  height: 10px !important;
+}
+
+::ng-deep .ngx-slider-tick{
+  height: 20px !important;
+  width: 20px !important;
+}
+
+::ng-deep .ngx-slider-bar-wrapper{
+  padding-top: 18px !important;
+}
+
+::ng-deep .ngx-slider-pointer{
+  height: 25px !important;
+  width: 26px !important;
+  top: -6px !important;
+  // margin-left: 8px;
+}
+
+::ng-deep .ngx-slider-pointer::after{
+  background: none !important;
+}

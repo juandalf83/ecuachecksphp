@@ -1,0 +1,105 @@
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px" *ngIf="!registrationCompleted">
+  <div fxFlex.gt-md="50%" fxFlex fxShow.gt-sm>
+    <img src="assets/img/imagen-signin.svg" height="100%">
+  </div>
+  <div fxFlex.gt-md="50%" fxFlex>
+    <div class="card border-radius">
+      <div style="padding-right: 24px; margin-bottom: 70px;">
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+          <div fxFlex="50%">
+            <div class="text-header">¿Ya tienes cuenta?</div>
+          </div>
+          <div fxFlex="50%">
+            <button type="button" color="accent" class="btn-green" mat-raised-button (click)="goLogin()">
+              Inicia sesión
+            </button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="text-inicio">
+          Realiza tu primera
+          consulta <span style="color: #583ee2;">gratis.</span>
+        </div>
+        <div class="padding" fxLayout="column" fxLayoutGap="16px" [formGroup]="form">
+          <div fxFlex="auto" fxLayout="column">
+            <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+              <mat-form-field fxFlex="grow" appearance="outline">
+                <mat-label>Correo electrónico</mat-label>
+                <input matInput required formControlName="email" (blur)="validEmail($event.target.value)">
+                <mat-error *ngIf="isEmailErr">{{emailErr}}</mat-error>
+              </mat-form-field>
+            </div>
+            <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+              <mat-form-field appearance="outline" fxFlex>
+                <mat-label>Nombre empresa</mat-label>
+                <input type="text" formControlName="company_name" matInput (keyup)="onKey($event.target.value, 'company_name')">
+              </mat-form-field>
+            </div>
+            <div style="margin-bottom: 5px;">
+              <div fxFlex="1 1 auto">
+                <mat-form-field color="primary" appearance="outline" style="width: 70px;">
+                  <input matInput formControlName="prefixPhone" type="text">
+                </mat-form-field>
+              </div>
+              <div fxFlex="9 1 auto">
+                <mat-form-field color="primary" appearance="outline" fxFlex="grow">
+                  <mat-label>Teléfono de contacto</mat-label>
+                  <input matInput formControlName="phone" type="text" maxlength="9" 
+                    (keypress)="($event.charCode >= 48 && $event.charCode < 58)" 
+                    (blur)="validNumber()"
+                    [errorStateMatcher]="matcherPhone"
+                  >
+                  <mat-hint *ngIf="!isPhoneErr">El numero debe tener la siguiente estructura 999097611</mat-hint>
+                  <mat-error *ngIf="isPhoneErr">{{phoneErr}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+              <mat-checkbox color="primary" formControlName="authorize" (click)="authorize()">
+                <span>Autorizo los <strong>términos y condiciones</strong> y <strong>tratamiento de
+                  manejo de datos</strong></span>
+              </mat-checkbox>
+            </div>
+          </div>
+    
+          <button type="button" color="primary" class="btn-blue" mat-raised-button [disabled]="blockButtton" (click)="send()">
+            Crear cuenta
+          </button>
+        </div>
+      </div>
+      <div style="text-align: center;">
+        <p>Todos los derechos reservados. Grupo Toledo {{year}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="registration-completed" *ngIf="registrationCompleted">
+  <div class="box-registration-completed">
+    <div fxLayout="row" fxLayoutAlign="start center" class="text-gt">
+      <img style="height: 25px; width: 25px;" src="assets/img/logo-ecuachecks-icono.svg"> 
+      <img style="height: 18px; margin-left: 10px;" src="assets/img/logo-ecuachecks-letras.svg">
+    </div>
+    <div class="padding">
+      <mat-divider></mat-divider>
+    </div>
+    <div class="padding-registration-completed" style="font-size: 2.2em;font-weight: bold;line-height: 1.2;">
+      Valida tu cuenta antes de comenzar
+    </div>
+    <div class="padding-registration-completed">
+      <p style="font-size: 1.1em;">
+        Hemos enviado un correo electrónico para poder
+        confirmar tu cuenta.
+      </p>
+      <p style="font-size: 1.1em;">
+        Por favor, si no recibiste en bandeja de entrada, 
+        revisar tu bandeja de spam
+      </p>
+    </div>
+    <div class="padding-registration-completed">
+      <button type="button" color="primary" class="btn-blue" mat-raised-button (click)="goLogin()">
+        Regresar a inicio de sessión
+      </button>
+    </div>
+  </div>
+</div>

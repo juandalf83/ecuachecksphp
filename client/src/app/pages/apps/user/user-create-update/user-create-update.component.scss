@@ -1,0 +1,11 @@
+@import "../../../../layout/layout.component.scss";
+
+.title-pass{
+    color: #3a4f9e;
+    margin-bottom: 5px;
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper{
+    font-size: 0.6em;
+    line-height: 12px;
+  }

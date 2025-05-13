@@ -1,0 +1,42 @@
+<div class="dashboard">
+  <fury-header-plan></fury-header-plan>
+  <div class="padding container-box">
+    <div class="header-box">
+      <div class="title-box">Contratos de empresas</div>
+    </div>
+    <div class="elevation border-radius route-animations-elements">
+      <fury-list [columns]="columns" (filterChange)="onFilterChange($event)">
+        <mat-table #table [dataSource]="dataSource" matSort>
+
+          <!-- fullName Column -->
+          <ng-container *ngFor="let column of columns">
+            <ng-container *ngIf="column.isModelProperty && column.property != 'status'" [matColumnDef]="column.property">
+              <mat-header-cell [ngStyle]="{'max-width': column.width }" *matHeaderCellDef mat-sort-header> {{ column.name }}</mat-header-cell>
+              <mat-cell *matCellDef="let row" [ngStyle]="{'max-width': column.width }">
+                {{ row[column.property] }}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container *ngIf="column.property == 'status'" [matColumnDef]="column.property">
+              <mat-header-cell [ngStyle]="{'max-width': column.width }" *matHeaderCellDef mat-sort-header> {{ column.name }}</mat-header-cell>
+              <mat-cell *matCellDef="let row" [ngStyle]="{'max-width': column.width }">
+                <span class="text-header-cell" fxShow.xs fxHide>{{ column.name }}</span>
+                <div class="margin-section">                
+                  <mat-slide-toggle [(ngModel)]="row['status']" (change)="changeStatus(row)"></mat-slide-toggle>
+                </div>
+              </mat-cell>
+            </ng-container>
+          </ng-container>
+          
+          <mat-header-row *matHeaderRowDef="visibleColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: visibleColumns;"
+                    class="clickable route-animations-elements"></mat-row>
+        </mat-table>
+
+        <mat-paginator class="paginator" [pageSize]="pageSize"></mat-paginator>
+
+      </fury-list>
+
+    </div>
+  </div>
+</div>

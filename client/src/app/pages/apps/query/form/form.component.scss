@@ -1,0 +1,36 @@
+@import "var";
+
+.title-query-box{
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+.subtitle-query-box{
+  font-size: 0.8em;
+  color: #919191
+}
+
+.label-input-query-box{
+  font-size: 0.9em;
+  color: #919191
+}
+
+.form-query-box{
+  margin-top: 20px;
+}
+
+.btn-blue{
+  width: 100%;
+  background-color: $color-btn3 !important;
+  color: #fff;
+  font-size: 0.9em;
+}
+
+.btn-blue:hover{
+  background-color: $color-btn3h !important;
+}
+
+.btn-blue:disabled{
+  background-color: $color-btn3d !important;
+}
+

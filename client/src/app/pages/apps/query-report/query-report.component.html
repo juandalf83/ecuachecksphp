@@ -1,0 +1,268 @@
+<div class="dashboard">
+  <fury-header-plan></fury-header-plan>
+  <div class="padding container-box" id="htmlData">
+    <div class="div-block">
+      <div fxLayout="column" fxLayout.gt-sm="row">
+        <div fxFlex>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <img style="height: 25px; width: 25px;" src="assets/img/logo-ecuachecks-icono.svg"> 
+            <img style="height: 18px; margin-left: 10px;" src="assets/img/logo-ecuachecks-letras.svg">
+          </div>
+        </div>
+        <div fxFlex style="text-align: right;">
+          <div>Background Check</div>
+          
+        </div>
+      </div>
+    </div>
+    <div class="div-block">
+      <div fxLayout="column" fxLayout.gt-sm="row">
+        <div fxFlex fxFlex.gt-sm="30%" style="margin-bottom: 10px;">
+          <div>
+            <div><strong>Persona consultada:</strong></div>
+            <div class="text-result-principal">{{register.name}}</div>
+          </div>
+        </div>
+        <div fxFlex fxFlex.gt-sm style="margin-bottom: 10px;">
+          <div><strong>N° de identificación:</strong></div>
+          <div class="text-result-principal">{{register.document}}</div>
+        </div>
+        <div fxFlex fxFlex.gt-sm="30%" style="margin-bottom: 10px;">
+          <div><strong>Fecha de consulta:</strong> 15 de enero de 2024</div>
+        </div>
+      </div>
+    </div>
+    <div class="div-block">
+      <div class="block-filter">
+        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="10px">
+          <div fxFlex fxFlex.gt-sm="20%" style="margin-bottom: 10px;">
+            <div class="big-text">Resumen de consultas</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <fury-table-responsive 
+          [data]="controlOrganisms" 
+          [header]="headerTableControlOrganisms" 
+          titleMovil="Organismos de control"
+        ></fury-table-responsive>
+      </div>
+      
+    </div>
+    <div>
+      <div *ngFor="let controlOrganism of controlOrganisms">
+        <div class="div-block" *ngIf="controlOrganism.message != ''">
+          <div fxLayout="row" fxLayoutAlign="start center" style="margin-bottom: 20px;">
+            <div fxFlex="60%" fxFlex.gt-sm="80%" class="big-text">{{controlOrganism.organims}} - {{controlOrganism.consultation}}</div>
+            <div fxFlex="40%" fxFlexgt-sm="20%" style="display: flex; justify-content: right;">
+              <div *ngFor="let types_alert of typesAlertsMessage">
+                <div *ngIf="controlOrganism.message == types_alert.type">
+                  <div class="box-status" [ngStyle]="{'background-color': types_alert.backgroud }">
+                    <span [ngStyle]="{color: types_alert.color }">{{controlOrganism.message}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="controlOrganism.field === 'criminal_record'">
+            <fury-table-responsive 
+              [data]="[register[controlOrganism.field]]" 
+              [header]="headerTableCriminalRecords" 
+              [titleMovil]="controlOrganism.organims"
+            ></fury-table-responsive>
+          </div>
+          <div *ngIf="controlOrganism.field === 'exit_impediment'">
+            <fury-table-responsive 
+              [data]="[register[controlOrganism.field]]" 
+              [header]="headerTableExitImpediment" 
+              [titleMovil]="controlOrganism.organims"
+            ></fury-table-responsive>
+          </div>
+          <div *ngIf="controlOrganism.field === 'supa'">
+            <fury-table-responsive 
+              [data]="[register[controlOrganism.field]]" 
+              [header]="headerTableSUPA" 
+              [titleMovil]="controlOrganism.organims"
+            ></fury-table-responsive>
+          </div>
+          <div *ngIf="controlOrganism.field === 'judicial_processes.defendant'">
+            <div *ngIf="register.judicial_processes.defendant.length > 0">
+              <div *ngFor="let process of register.judicial_processes.defendant">
+                <fury-table-responsive 
+                  [data]="[process]" 
+                  [header]="headerTableJudicialProcesses" 
+                  [titleMovil]="controlOrganism.organims"
+                ></fury-table-responsive>
+                <div style="margin-bottom: 20px;">
+                  <div class="big-text" style="margin-bottom: 10px;">Detalle del proceso</div>
+                  <div fxLayout="row">
+                    <div fxFlex style="font-size: 0.9em;">
+                      <div fxLayout="row" fxLayoutAlign="start center">
+                        <div fxFlex="30%">Materia:</div>
+                        <div fxFlex="70%">{{process.detail.subject}}</div>
+                      </div>
+                      <div fxLayout="row" fxLayoutAlign="start center">
+                        <div fxFlex="30%">Delito/Asunto:</div>
+                        <div fxFlex="70%">{{process.detail.crime_matter}}</div>
+                      </div>
+                      <div fxLayout="row" fxLayoutAlign="start center">
+                        <div fxFlex="30%">Tipo de acción:</div>
+                        <div fxFlex="70%">{{process.detail.type_action}}</div>
+                      </div>
+                    </div>
+                    <div fxFlex fxHide fxShow.gt-sm></div>
+                  </div>
+                </div>
+                <div class="head-row" fxHide fxShow.gt-sm>
+                  <div fxLayout="row" fxLayoutAlign="start center">
+                    <div [fxFlex]="column.width" *ngFor="let column of headerJudicialProcesses">{{column.title}}</div>
+                  </div>
+                </div>
+                <div *ngFor="let subject of process.subjects" style="margin-bottom: 20px;">
+                  <fury-table-judicial
+                    [subject]="subject" 
+                    [header]="headerJudicialProcesses" 
+                    titleMovil="Sujetos"
+                    (functionCell)="actionTableJudicial($event)"
+                  ></fury-table-judicial>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="register.judicial_processes.defendant.length === 0">
+              <div class="box-empty">
+                No se encontró resultados.
+              </div>
+            </div>
+          </div>
+          <div *ngIf="controlOrganism.field === 'judicial_processes.demanding'">
+            <div *ngIf="register.judicial_processes.demanding.length > 0">
+              <div *ngFor="let process of register.judicial_processes.demanding">
+                <fury-table-responsive 
+                  [data]="[process]" 
+                  [header]="headerTableJudicialProcesses" 
+                  [titleMovil]="controlOrganism.organims"
+                ></fury-table-responsive>
+                <div style="margin-bottom: 20px;">
+                  <div class="big-text" style="margin-bottom: 10px;">Detalle del proceso</div>
+                  <div fxLayout="row">
+                    <div fxFlex style="font-size: 0.9em;">
+                      <div fxLayout="row" fxLayoutAlign="start center">
+                        <div fxFlex="30%">Materia:</div>
+                        <div fxFlex="70%">{{process.detail.subject}}</div>
+                      </div>
+                      <div fxLayout="row" fxLayoutAlign="start center">
+                        <div fxFlex="30%">Delito/Asunto:</div>
+                        <div fxFlex="70%">{{process.detail.crime_matter}}</div>
+                      </div>
+                      <div fxLayout="row" fxLayoutAlign="start center">
+                        <div fxFlex="30%">Tipo de acción:</div>
+                        <div fxFlex="70%">{{process.detail.type_action}}</div>
+                      </div>
+                    </div>
+                    <div fxFlex fxHide fxShow.gt-sm></div>
+                  </div>
+                </div>
+                <div class="head-row" fxHide fxShow.gt-sm>
+                  <div fxLayout="row" fxLayoutAlign="start center">
+                    <div [fxFlex]="column.width" *ngFor="let column of headerJudicialProcesses">{{column.title}}</div>
+                  </div>
+                </div>
+                <div *ngFor="let subject of process.subjects" style="margin-bottom: 20px;">
+                  <fury-table-judicial
+                    [subject]="subject" 
+                    [process]="process" 
+                    [header]="headerJudicialProcesses" 
+                    titleMovil="Sujetos"
+                    (functionCell)="actionTableJudicial($event)"
+                  ></fury-table-judicial>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="register.judicial_processes.demanding.length === 0">
+              <div class="box-empty">
+                No se encontró resultados.
+              </div>
+            </div>
+          </div>
+          <div *ngIf="controlOrganism.field === 'sri_obligations'">
+            <fury-table-responsive 
+              [data]="[register[controlOrganism.field]]" 
+              [header]="headerTableSri" 
+              titleMovil="Datos Sri"
+            ></fury-table-responsive>
+            <div *ngIf="validDebts()">
+              <fury-table-responsive 
+                [data]="[register[controlOrganism.field]]" 
+                [header]="headerTableSriPendingObligations" 
+                titleMovil="Obligaciones pendientes"
+              ></fury-table-responsive>
+            </div>
+            <div *ngIf="!validDebts()">
+              <div class="box-empty">
+                El ciudadano / contribuyente no registra deudas firmes, impugnadas o en facilidades de pago
+              </div>
+            </div>
+          </div>
+          <div *ngIf="controlOrganism.field === 'ministry_education'">
+            <fury-table-responsive 
+                [data]="register[controlOrganism.field]" 
+                [header]="headerTableMinistryEducation" 
+                [titleMovil]="controlOrganism.organims"
+              ></fury-table-responsive>
+          </div>
+          <div *ngIf="controlOrganism.field === 'senescyt'">
+            <div *ngIf="validSenescyt()">
+              <div *ngIf="register[controlOrganism.field].third_level.length > 0">
+                <div class="subtitle-text" fxHide fxShow.gt-sm>Títulos de tercer nivel</div>
+                <fury-table-responsive 
+                  [data]="register[controlOrganism.field].third_level" 
+                  [header]="headerTableSenescyt" 
+                  titleMovil="Títulos de tercer nivel"
+                ></fury-table-responsive>
+              </div>
+              <div *ngIf="register[controlOrganism.field].third_technical_level.length > 0">
+                <div class="subtitle-text" fxHide fxShow.gt-sm>Títulos técnicos de tercer nivel</div>
+                <fury-table-responsive 
+                  [data]="register[controlOrganism.field].third_technical_level" 
+                  [header]="headerTableSenescyt" 
+                  titleMovil="Títulos técnicos de tercer nivel"
+                ></fury-table-responsive>
+              </div>
+              <div *ngIf="register[controlOrganism.field].fourth_level.length > 0">
+                <div class="subtitle-text" fxHide fxShow.gt-sm>Títulos de cuarto nivel</div>
+                <fury-table-responsive 
+                  [data]="register[controlOrganism.field].fourth_level" 
+                  [header]="headerTableSenescyt" 
+                  titleMovil="Títulos de cuarto nivel"
+                ></fury-table-responsive>
+              </div>
+            </div>
+            <div *ngIf="!validSenescyt()">
+              <div class="box-empty">
+                No se encontró resultados.
+              </div>
+            </div>
+          </div>
+          <div *ngIf="controlOrganism.field === 'national_transit_agency'">
+            <fury-table-responsive 
+              [data]="[register[controlOrganism.field]]" 
+              [header]="headerTableANT" 
+              [titleMovil]="controlOrganism.organims"
+            ></fury-table-responsive>
+            <div *ngIf="register[controlOrganism.field].licenses.length > 0">
+              <div class="subtitle-text" fxHide fxShow.gt-sm>Licencias</div>
+              <fury-table-responsive 
+                [data]="register[controlOrganism.field].licenses" 
+                [header]="headerTableANTLicenses" 
+                titleMovil="Licencias"
+              ></fury-table-responsive>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,160 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?oh9iso');
+  src:  url('fonts/icomoon.eot?oh9iso#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?oh9iso') format('truetype'),
+    url('fonts/icomoon.woff?oh9iso') format('woff'),
+    url('fonts/icomoon.svg?oh9iso#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-ingresos:before {
+  content: "\e927";
+}
+.icon-adelantar:before {
+  content: "\e900";
+}
+.icon-adjuntos:before {
+  content: "\e901";
+}
+.icon-ajustes:before {
+  content: "\e902";
+}
+.icon-analytics:before {
+  content: "\e903";
+}
+.icon-buro-credito:before {
+  content: "\e904";
+}
+.icon-cerrar-sesion:before {
+  content: "\e905";
+}
+.icon-checks-incluidos:before {
+  content: "\e906";
+}
+.icon-checks-preempleo:before {
+  content: "\e907";
+}
+.icon-checks-rutina:before {
+  content: "\e908";
+}
+.icon-continouos-checks:before {
+  content: "\e909";
+}
+.icon-datos-generales:before {
+  content: "\e90a";
+}
+.icon-desplegar:before {
+  content: "\e90b";
+}
+.icon-eliminar:before {
+  content: "\e90c";
+}
+.icon-estructura:before {
+  content: "\e90d";
+}
+.icon-estudio-confiabilidad-personal:before {
+  content: "\e90e";
+}
+.icon-evaluacion-poligrafo:before {
+  content: "\e90f";
+}
+.icon-evaluados-ingresados:before {
+  content: "\e910";
+}
+.icon-facturacion:before {
+  content: "\e911";
+}
+.icon-filtros-parametros:before {
+  content: "\e912";
+}
+.icon-gestores:before {
+  content: "\e913";
+}
+.icon-gt-puntos:before {
+  content: "\e914";
+}
+.icon-inicio:before {
+  content: "\e915";
+}
+.icon-mi-cuenta:before {
+  content: "\e916";
+}
+.icon-mis-reportes:before {
+  content: "\e917";
+}
+.icon-nueva-solicitud:before {
+  content: "\e918";
+}
+.icon-organismos-control:before {
+  content: "\e919";
+}
+.icon-presenta-observaciones .path1:before {
+  content: "\e91a";
+  color: rgb(255, 83, 82);
+}
+.icon-presenta-observaciones .path2:before {
+  content: "\e91b";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-presenta-observaciones .path3:before {
+  content: "\e91c";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-referencias:before {
+  content: "\e91d";
+}
+.icon-regresar:before {
+  content: "\e91e";
+}
+.icon-revisar-observaciones .path1:before {
+  content: "\e91f";
+  color: rgb(255, 158, 85);
+}
+.icon-revisar-observaciones .path2:before {
+  content: "\e920";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-revisar-observaciones .path3:before {
+  content: "\e921";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-seguimiento:before {
+  content: "\e922";
+}
+.icon-sin-novedad .path1:before {
+  content: "\e923";
+  color: rgb(18, 214, 125);
+}
+.icon-sin-novedad .path2:before {
+  content: "\e924";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-visita-domiciliaria:before {
+  content: "\e925";
+}
+.icon-whatsapp:before {
+  content: "\e926";
+}

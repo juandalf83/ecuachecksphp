@@ -1,0 +1,58 @@
+<div class="title-modal">
+  Delito/Asunto
+  <span style="font-weight: 100;">{{defaults.process.crime_issue}}</span> 
+</div>
+<mat-dialog-content>
+  <div class="head-row" fxHide fxShow.gt-sm>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div [fxFlex]="column.width" *ngFor="let column of header">{{column.title}}</div>
+    </div>
+  </div>
+  <div class="head-row" fxShow fxHide.gt-sm>
+    <div>Procesos</div>
+  </div>
+  <div class="body-section">
+    <div *ngIf="activities.length > 0">
+      <div *ngFor="let row of activities; index as i;">
+        <div class="body-row" 
+          [ngStyle]="{'border-bottom': i < (activities.length-1) ? 'solid 1px #37374e' : 'none'}"
+          (click)="showDetail(row)"
+        >
+          <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="start center">
+            <div fxFlex [fxFlex.gt-sm]="column.width" *ngFor="let column of header" style="width: 100%;">
+              <div *ngIf="column.type === 'text'">
+                <div fxLayout="row" fxLayoutGap.gt-sm="10px">
+                  <div fxFlex="35%" fxShow fxHide.gt-sm class="head-cell">{{column.title}}:</div>
+                  <div fxFlex>
+                    <div *ngIf="row[column.field] != ''">{{row[column.field]}}</div>
+                    <div *ngIf="row[column.field] == ''"> - </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="column.type === 'action'">
+                <div fxLayout="row" fxLayoutGap.gt-sm="10px">
+                  <div fxFlex="35%" fxShow fxHide.gt-sm class="head-cell">{{column.title}}:</div>
+                  <div fxFlex>
+                    <div style="display: flex; align-items: center;">
+                      <div class="icons-action-result">
+                        <img height="25" [src]="row.icon" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="row.expanded" style="margin-top: 20px;">
+            <div>{{row.activity}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="activities.length === 0">
+      <div class="body-row">
+        No se encontró resultados.
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>

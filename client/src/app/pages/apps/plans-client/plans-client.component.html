@@ -1,0 +1,29 @@
+<div class="dashboard">
+  <fury-header-plan></fury-header-plan>
+  <div class="padding container-box">
+    <div class="header-box">
+      <div class="title-box">Planes y facturación</div>
+      <div class="subtitle-box">Realiza la consulta masiva en pocos clics</div>
+    </div>
+    <div class="container-plans">
+      <mat-tab-group style="margin-top: 5px;">
+        <mat-tab label="Plan mensual">
+          <div *ngIf="showPlans">
+            <fury-plan-select [plans]="plans" type="M"></fury-plan-select>
+          </div>
+          <div *ngIf="!showPlans">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+          </div>
+        </mat-tab>
+        <mat-tab label="Plan anual">
+          <div *ngIf="showPlans">
+            <fury-plan-select [plans]="plans" type="A"></fury-plan-select>
+          </div>
+          <div *ngIf="!showPlans">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

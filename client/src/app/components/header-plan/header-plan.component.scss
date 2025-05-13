@@ -1,0 +1,68 @@
+@import "var";
+
+.header-container{
+  height: 64px;
+  background-color: $color-btn3;
+  display: flex;
+  align-items: center;
+  padding: 10px 35px;
+  color: #fff;
+  font-size: 0.8em;
+}
+
+.box-center{
+  display: flex;
+  align-items: center;
+}
+
+.box-center-right{
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
+.box-country{
+  display: flex;
+  align-items: center;
+  padding: 5px 8px;
+  background: #fff;
+  color: #000;
+  border-radius: 5px;
+}
+
+.circular--landscape {
+  display: inline-block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.circular--landscape img {
+  width: auto;
+  height: 100%;
+  margin-left: -25%;
+}
+
+.btn-user{
+  // width: 100%;
+  // background-color: #583ee2 !important;
+  color: #fff !important;
+  font-size: 0.9em;
+}
+
+.btn-green{
+  width: 100%;
+  background-color: $color-btn1 !important;
+  color: #fff !important;
+  font-size: 0.8em;
+}
+
+.btn-green:hover{
+  background-color: $color-btn1h !important;
+}
+
+.btn-green:disabled{
+  background-color: $color-btn1d !important;
+}

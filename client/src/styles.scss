@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./@fury/styles/core";
+@import "./app/app.theme";
+
+.info-alert {
+    --mdc-snackbar-container-color: #4ab6e8;
+    --mat-snack-bar-button-color: #307696;
+}
+
+.danger-alert {
+    --mdc-snackbar-container-color: #ff5352;
+    --mat-snack-bar-button-color: #301010;
+}
+
+.warning-alert {
+    --mdc-snackbar-container-color: #ff9e55;
+    --mat-snack-bar-button-color: #8d5931;
+}
+
+// .mat-dialog-container {
+//     padding: 0px !important;
+//     overflow: hidden !important;
+// }
+
+.title-modal {
+    color: #000;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 20px;
+    border-bottom: solid 1px #e1e1e1;
+}
+
+.mdc-text-field--outlined .mdc-floating-label {
+    font-size: 0.9em !important;
+}

@@ -1,0 +1,46 @@
+<div class="header-container">
+  <div fxLayout="row" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px" style="width: 100%;">
+    <div fxFlex fxFlex.gt-sm="25%" class="box-center" fxHide fxShow.gt-sm *ngIf="user.rol_id != 1">
+      Verificación de antecedentes en un click.
+    </div>
+    <div fxFlex class="box-center" *ngIf="user.rol_id != 1">
+      <div class="box-country">
+        <span style="margin-right: 10px;">Usted está en:</span>
+        <div class="circular--landscape">
+          <img
+            src="https://flagcdn.com/w20/ec.png"
+            srcset="https://flagcdn.com/w40/ec.png 2x"
+            width="20"
+            alt="Ecuador"
+          >
+        </div>
+      </div>
+    </div>
+    <div fxFlex class="box-center-right">
+      <button type="button" mat-button class="btn-user" [matMenuTriggerFor]="actionsMenu" (click)="$event.stopPropagation()">
+        {{user.email}}
+      </button>
+
+      <mat-menu #actionsMenu="matMenu" yPosition="below" xPosition="before">
+        <button (click)="goPage('my_account')" mat-menu-item>
+          <span>Mi cuenta</span>
+        </button>
+        <button (click)="goPage('company/my_team')" mat-menu-item *ngIf="user.rol_id == 2">
+          <span>Mi equipo</span>
+        </button>
+        <button (click)="goPage('company/plans')" mat-menu-item *ngIf="user.rol_id == 2">
+          <span>Planes y facturación</span>
+        </button>
+        <button (click)="goPage('company/rules')" mat-menu-item *ngIf="user.rol_id == 2">
+          <span>Sistema de reglas</span>
+        </button>
+        <button (click)="goPage('login')" mat-menu-item>
+          <span>Cerrar sesión</span>
+        </button>
+      </mat-menu>
+    </div>
+    <div fxFlex fxFlex.gt-sm="10%" fxHide fxShow.gt-sm *ngIf="user.rol_id == 2">
+      <button mat-raised-button color="primary" (click)="goPlans()" style="font-size: 1em;" class="btn-green">Ver planes</button>
+    </div>
+  </div>
+</div>

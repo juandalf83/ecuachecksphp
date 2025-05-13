@@ -1,0 +1,40 @@
+<div class="title-modal">Filtros Aplicados</div>
+<mat-dialog-content>
+  <div style="padding: 10px 20px;">
+    <div style="margin-bottom: 20px;">
+      <div class="text-block-filters">Fuentes de consulta</div> 
+      <div>
+        <mat-chip-listbox>
+          <mat-chip *ngFor="let cid of filtersToApply"
+            (click)="removeChip(cid, 'toApply')"
+          >
+            {{cid.name}}
+            <!-- <mat-icon matChipRemove>cancel</mat-icon> -->
+          </mat-chip>
+        </mat-chip-listbox>
+      </div>   
+    </div>
+    <mat-divider></mat-divider>
+    <div style="margin-bottom: 20px;">
+      <div class="text-block-filters">Fuentes consultadas</div> 
+      <div>
+        <mat-chip-listbox>
+          <mat-chip *ngFor="let cid of appliedFilters"
+            [removable]="true" (removed)="removeChip(cid, 'applied')"
+          >
+            {{cid.name}}
+            <button matChipRemove aria-label="Quitar">
+              <mat-icon>cancel</mat-icon>
+            </button>
+            <!-- <mat-icon matChipRemove>cancel</mat-icon> -->
+          </mat-chip>
+        </mat-chip-listbox>
+      </div>   
+    </div>
+    <div>
+      <button type="button" color="primary" class="btn-blue" mat-raised-button (click)="applyFilters()">
+        Aplicar filtros
+      </button>
+    </div>
+  </div>
+</mat-dialog-content>

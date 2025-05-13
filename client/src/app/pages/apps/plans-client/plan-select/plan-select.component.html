@@ -1,0 +1,30 @@
+<div style="padding: 25px 10px;" *ngIf="plans.length > 0">
+  <div style="margin-bottom: 25px;">Selecciona el número de checks aproximados que vas a realizar por mes. Te recomendamos un plan que se ajuste a tu requerimiento</div>
+  <div style="overflow: hidden;padding: 10px;">
+    <ngx-slider [(value)]="value" [options]="options" (userChange)="onPlanChange($event)"></ngx-slider>
+  </div>
+  <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px" style="width: 100%;padding: 30px 10px;">
+    <div fxFlex fxFlex.gt-sm="20%">
+      <div class="text-plan">
+        <div>Plan</div>
+        <div style="font-weight: bold;">{{selectedPlan.name}}</div>
+      </div>
+      <div class="text-credits"><strong>{{credits}} </strong>checks al {{titleChecks}}</div>
+      <div>
+        <div class="text-price">US ${{pay_value}}</div>
+        <div>Precio mensual</div>
+      </div>
+    </div>
+    <div fxFlex>
+      <div>
+        <div>Importante:</div>
+        <div>Cada check adicional cuesta US $ {{selectedPlan.additional_value}}. Hasta {{additional}} checks adicionales</div>
+      </div>
+    </div>
+  </div>
+  <div style="padding-left: 10px;">
+    <button type="button" color="primary" class="btn-blue" mat-raised-button (click)="applyNow()" style="margin-bottom: 10px">
+      Solicitar ahora
+    </button>
+  </div>
+</div>

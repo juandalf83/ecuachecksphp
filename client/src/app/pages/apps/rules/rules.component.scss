@@ -1,0 +1,46 @@
+@import "var";
+
+.clickable {
+  cursor: pointer;
+}
+
+.btn-blue{
+  padding: 5px;
+  width: 100%;
+  background-color: #3b3560  !important;
+  color: #fff;
+  font-size: 0.9em;
+  border-radius: 17px;
+}
+
+.btn-blue:hover{
+  background-color: #3d2b969d !important;
+}
+
+.btn-stroked-blue{
+  padding: 5px;
+  width: 100%;
+  border: solid 1px #3b3560 !important;
+  color: #3b3560 !important;
+  font-size: 0.9em;
+  border-radius: 17px;
+}
+
+.btn-stroked-blue:hover{
+  color: #3d2b969d !important;
+  border: solid 1px #3d2b969d !important;
+}
+
+.tab-option{
+  height: 100%;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+
+.tab-option-active{
+  height: 100%;
+  font-size: 0.9em;
+  border-bottom: solid 1px black;
+  font-weight: bold;
+  cursor: pointer;
+}

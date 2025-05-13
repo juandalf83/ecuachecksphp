@@ -1,0 +1,22 @@
+<div>
+  <svg [height]="dimension" [width]="width" style="border: solid 1px black">
+    <circle [r]="ratio" [cx]="cValue" [cy]="cValue" fill="transparent"
+            stroke="#f7f7f7"
+            [stroke-width]="stroke"
+            [stroke-dasharray]="value_percentaje1+' '+lenght_circle"
+    />
+    <circle [r]="ratio" [cx]="cValue" [cy]="cValue" fill="transparent"
+            [stroke]="color"
+            [stroke-width]="stroke"
+            [stroke-linecap]="round" 
+            [stroke-dasharray]="value_percentaje+' '+lenght_circle"
+    />
+    <text [x]="xText" [y]="yText" [fill]="color"
+        font-family="poppins"
+        font-weight="bold"
+        [font-size]="sizeFont"
+    >
+      {{percentage.$prefix}}
+    </text>';
+  </svg>
+</div>

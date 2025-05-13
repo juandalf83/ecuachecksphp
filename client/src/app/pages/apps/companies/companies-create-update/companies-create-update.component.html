@@ -1,0 +1,94 @@
+<div class="register-container">
+  <div class="register-body">
+    <form [formGroup]="form" (ngSubmit)="save()" id="ngForm" #documentEditForm="ngForm">
+      <h2 mat-dialog-title>{{titlePanel}}</h2>
+      
+      <h4 class="subtitle-register">Asigna un nombre a tu nueva empresa cliente</h4>
+      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+        <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Nombre</mat-label>
+          <input type="text" formControlName="nombre_empresa" matInput (keypress)="validChart($event)">
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+        <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Ruc</mat-label>
+          <input type="text" formControlName="ruc" matInput>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px" style="margin-bottom: 20px;">
+        <div fxFlex="80%">Contiene sub empresas</div>
+        <div fxFlex="20%" fxLayoutAlign="end center">
+          <mat-slide-toggle formControlName="subempresa"></mat-slide-toggle>
+        </div>
+      </div>
+      
+      <div *ngIf="mode == 'create'">
+        <h4 class="subtitle-register">Crea el usuario administrador</h4>
+        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+          <mat-form-field appearance="outline" fxFlex>
+            <mat-label>Nombre</mat-label>
+            <input type="text" formControlName="nombres_usuario" matInput>
+          </mat-form-field>
+        </div>
+        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+          <mat-form-field appearance="outline" fxFlex>
+            <mat-label>Apellido</mat-label>
+            <input type="text" formControlName="apellidos_usuario" matInput>
+          </mat-form-field>
+        </div>
+        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+          <mat-form-field appearance="outline" fxFlex>
+            <mat-label>Cédula</mat-label>
+            <input type="text" formControlName="cedula" matInput>
+          </mat-form-field>
+        </div>
+        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+          <mat-form-field appearance="outline" fxFlex>
+            <mat-label>E-mail</mat-label>
+            <input type="text" formControlName="email" matInput>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px" style="margin-bottom: 20px;">
+        <div fxFlex="80%">Polígrafo</div>
+        <div fxFlex="20%" fxLayoutAlign="end center">
+          <mat-slide-toggle formControlName="poligrafo"></mat-slide-toggle>
+        </div>
+      </div>
+      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px" *ngIf="form.value.poligrafo">
+        <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Costo unitario sin IVA</mat-label>
+          <input type="text" formControlName="costo_poligrafo" matInput>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px" style="margin-bottom: 20px;">
+        <div fxFlex="80%">Estudio de Confiabilidad Personal</div>
+        <div fxFlex="20%" fxLayoutAlign="end center">
+          <mat-slide-toggle formControlName="estudio"></mat-slide-toggle>
+        </div>
+      </div>
+      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px" *ngIf="form.value.estudio">
+        <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Costo unitario sin IVA</mat-label>
+          <input type="text" formControlName="costo_estudio" matInput>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px" style="margin-bottom: 20px;">
+        <div fxFlex="80%">Facturas pendientes de pago</div>
+        <div fxFlex="20%" fxLayoutAlign="end center">
+          <mat-slide-toggle formControlName="tiene_facturas_pendientes" (change)="changeInvoicePending()"></mat-slide-toggle>
+        </div>
+      </div>
+      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px" style="margin-bottom: 20px;"
+        *ngIf="form.value.tiene_facturas_pendientes"
+      >
+        <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Facturas Pendientes</mat-label>
+          <input type="text" formControlName="facturas_pendientes" matInput>
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+</div>

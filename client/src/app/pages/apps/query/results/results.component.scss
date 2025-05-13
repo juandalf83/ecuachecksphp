@@ -1,0 +1,78 @@
+@import 'var';
+
+.title-result{
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.subtitle-result{
+  font-size: 0.8em;
+  color: #919191;
+  line-height: 15px;
+}
+
+.form-result{
+  margin-top: 20px;
+  overflow-y: auto;
+  height: 312px;
+}
+
+.item-result{
+  font-size: 0.8em;
+  margin-bottom: 10px;
+}
+
+.label-result{
+  color: #919191;
+  // margin-bottom: 9px;
+}
+
+.value-result{
+  font-weight: bold;
+  line-height: 15px;
+}
+
+.label-result-blue{
+  color: $color-btn3;
+  font-weight: bold;
+  margin-bottom: 9px;
+  font-size: 0.8em;
+}
+
+.divider-result{
+  margin-top: 5px;
+  margin-bottom: 9px;
+  border-bottom: solid 2px #14A710;
+}
+
+.table-result{
+  border: solid 1px #cfcfcf;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.th-result {
+  border: solid 1px #cfcfcf;
+  font-size: 0.8em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.td-result {
+  border: solid 1px #cfcfcf;
+  font-size: 0.8em;
+  color: #919191;
+  text-align: center;
+}
+
+::ng-deep .mat-tab-label{
+  font-size: 0.8em;
+  font-weight: bold;
+  height: 36px !important;
+}
+
+
+
+
+
+

@@ -1,0 +1,66 @@
+@import "../../../styles/icons/style.css";
+
+.container-buttons{
+  margin: 0 auto;
+  width: 93%;
+  padding: 35px 60px;
+  background-color: #fff;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.title-container{
+  color: #5100ff;
+  font-size: 1.3em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.subtitle-container{
+  color: #232323;
+  font-size: 1em;
+  text-align: center;
+  margin-top: 18px;
+}
+
+.title-btn{
+  color: #5100ff;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.icon-btn{
+  color: #919191;
+  font-size: 55px;
+}
+
+.icon-btn-blue{
+  color: #5100ff;
+  font-size: 55px;
+}
+
+.icon-btn-green{
+  color: #25D366;
+  font-size: 55px;
+}
+
+.list-buttons{
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.button-init{
+  width: 30%;
+  height: 200px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  padding: 30px;
+  border-radius: 20px;
+  cursor: pointer;
+}

@@ -1,0 +1,81 @@
+@import "var";
+
+.clickable {
+  cursor: pointer;
+}
+
+.div-block{
+  width: 100%;
+  background-color: #fff; 
+  border-radius: 15px;
+  padding: 20px 25px;
+  margin-bottom: 20px;
+  font-size: 0.9em;
+}
+
+.text-result-principal{
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #898989;
+}
+
+.icons-action-result{
+  display: flex; 
+  align-items: center;
+  cursor: pointer;
+}
+
+.block-filter{
+  background-color: #f7f6f6;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.big-text{
+  font-size: 1.2em;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.box-status{
+  font-size: 1.2em;
+  border-radius: 5px;
+  padding: 15px 25px;
+}
+
+.box-empty{
+  padding: 8px 20px;
+  font-size: 0.8em;
+  border: solid 1px #37374e;
+  border-radius: 12px;
+}
+
+.subtitle-text{
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.head-row{
+  background-color: $color-btn3;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 0.8em;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.block-process-expel{
+  padding: 15px;
+  border: solid 1px $color-btn3;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 960px) {
+  .big-text{
+    font-size: 0.9em;
+  }
+}

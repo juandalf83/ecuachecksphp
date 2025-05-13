@@ -1,0 +1,176 @@
+@import "var";
+
+.clickable {
+  cursor: pointer;
+}
+
+.title-query-box{
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.subtitle-query-box{
+  font-size: 0.8em;
+  color: #919191;
+  line-height: 15px;
+}
+
+.query-credits{
+  padding: 15px 35px;
+  font-size: 0.8em;
+  position: relative;
+  z-index: 2;
+}
+
+.item-query-box{
+  font-size: 0.8em;
+  margin-bottom: 10px;
+  border-bottom: solid 1px #cfcfcf;
+}
+
+.item-query-box1{
+  font-size: 0.8em;
+  margin-bottom: 10px;
+}
+
+.label-query-box{
+  font-weight: bold;
+}
+
+.value-query-box{
+  color: #919191;
+  margin-bottom: 9px;
+}
+
+.form-query-box{
+  margin-top: 25px;
+}
+
+.btn-blue{
+  width: 100%;
+  background-color: $color-btn3 !important;
+  color: #fff !important;
+  // font-size: 0.8em;
+  font-size: 0.7em;
+  line-height: 11px;
+}
+
+.btn-blue:hover{
+  background-color: $color-btn3h !important;
+}
+
+.btn-blue:disabled{
+  background-color: $color-btn3d !important;
+}
+
+.btn-blue-stroke{
+  width: 100%;
+  color: $color-btn3 !important;
+  border: solid 1px $color-btn3 !important;
+  // font-size: 0.8em;
+  font-size: 0.7em;
+  line-height: 11px;
+}
+
+.btn-blue-stroke:hover{
+  color: #593ee29d !important;
+  border: solid 1px $color-btn3h !important;
+}
+
+.btn-blue-stroke:disabled{
+  background-color: $color-btn3d !important;
+  border: solid 1px $color-btn3d !important;
+}
+
+.btn-gray-stroke{
+  width: 100%;
+  color: #919191 !important;
+  border: solid 1px #cfcfcf !important;
+  // font-size: 0.8em;
+  font-size: 0.7em;
+  line-height: 11px;
+}
+
+.btn-gray-stroke:hover{
+  color: #b9b9b9 !important;
+  border: solid 1px #b9b9b9 !important;
+}
+
+.btn-gray-stroke:disabled{
+  background-color: #eeeeeec7 !important;
+  border: solid 1px #eeeeeec7 !important;
+}
+
+.div-charge{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.spinner-charge{
+  display: flex;
+  justify-content: center;
+  margin-top: 55px;
+}
+
+.text-spinner{
+  position:relative; 
+  top: -84px; 
+  right: -50px;
+  font-size: 1.5em; 
+  color: $color-btn3;
+}
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+ 
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #000000;
+  animation: spinner .8s linear infinite;
+}
+
+:host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {   
+  stroke: #0CC20C !important;
+}
+
+::ng-deep .mat-progress-bar {
+  height: 8px !important;
+  border-radius: 6px;
+}
+
+::ng-deep .mat-progress-bar-fill::after {
+  background-color: rgb(12, 170, 69) !important;
+  z-index: 0;
+}
+
+::ng-deep .mat-form-field{
+  font-size: 12px;
+}
+
+@media screen and (min-width: 601px) and (max-width: 959px) {
+  .div-charge{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .div-charge{
+    height: auto;
+  }
+}

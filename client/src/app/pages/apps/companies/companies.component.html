@@ -1,0 +1,98 @@
+<div class="dashboard">
+  <fury-header-plan></fury-header-plan>
+  <div class="padding container-box">
+    <div class="header-box">
+      <div class="title-box">Empresas registradas</div>
+    </div>
+    <div class="elevation border-radius route-animations-elements">
+      <fury-list [columns]="columns" (filterChange)="onFilterChange($event)">
+        <!-- <div class="actions">
+          <button class="create" (click)="createCompany()" type="button" class="btn-black" 
+            mat-mini-fab color="primary">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div> -->
+
+        <mat-table #table [dataSource]="dataSource" matSort>
+
+          <!-- fullName Column -->
+          <ng-container *ngFor="let column of columns">
+            <ng-container *ngIf="column.isModelProperty && column.property != 'user_name' && column.property != 'status' && column.property != 'add_credits'" [matColumnDef]="column.property">
+              <mat-header-cell [ngStyle]="{'max-width': column.width, 'font-size': '0.9em' }" *matHeaderCellDef mat-sort-header> {{ column.name }}</mat-header-cell>
+              <mat-cell *matCellDef="let row" [ngStyle]="{'max-width': column.width, 'font-size': '0.9em' }">
+                {{ row[column.property] }}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container *ngIf="column.property == 'user_name'" [matColumnDef]="column.property">
+              <mat-header-cell [ngStyle]="{'max-width': column.width, 'font-size': '0.9em' }" *matHeaderCellDef mat-sort-header> {{ column.name }}</mat-header-cell>
+              <mat-cell *matCellDef="let row" [ngStyle]="{'max-width': column.width, 'font-size': '0.9em' }">
+                <span class="text-header-cell" fxShow.xs fxHide>{{ column.name }}</span>
+                <div class="margin-section">
+                  <div class="item-row-principal">{{ row['user_name'] }}</div>
+                  <div class="item-row-secondary"> +593{{ row['user_phone'] }}</div> 
+                </div>
+              </mat-cell>
+            </ng-container>
+            <ng-container *ngIf="column.property == 'add_credits'" [matColumnDef]="column.property">
+              <mat-header-cell [ngStyle]="{'max-width': column.width, 'font-size': '0.9em' }" *matHeaderCellDef mat-sort-header> {{ column.name }}</mat-header-cell>
+              <mat-cell *matCellDef="let row" [ngStyle]="{'max-width': column.width, 'font-size': '0.9em' }">
+                <span class="text-header-cell" fxShow.xs fxHide>{{ column.name }}</span>
+                <div class="margin-section"> 
+                  <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+                    <!-- <mat-form-field fxFlex="grow" appearance="outline" style="width: 100px; font-size: 0.9em;"> -->
+                      <input matInput 
+                        [(ngModel)]="row['add_credits']" 
+                        (keypress)="onlyNumbers($event)" 
+                        (blur)="changeAddCredits(row)"
+                        style="width: 70px; font-size: 0.9em;"
+                      >
+                    <!-- </mat-form-field> -->
+                  </div>               
+                </div>
+              </mat-cell>
+            </ng-container>
+            <ng-container *ngIf="column.property == 'status'" [matColumnDef]="column.property">
+              <mat-header-cell [ngStyle]="{'max-width': column.width, 'font-size': '0.9em' }" *matHeaderCellDef mat-sort-header> {{ column.name }}</mat-header-cell>
+              <mat-cell *matCellDef="let row" [ngStyle]="{'max-width': column.width, 'font-size': '0.9em' }">
+                <span class="text-header-cell" fxShow.xs fxHide>{{ column.name }}</span>
+                <div class="margin-section">                
+                  <mat-slide-toggle [(ngModel)]="row['status']" (change)="changeStatusCompany(row)"></mat-slide-toggle>
+                </div>
+              </mat-cell>
+            </ng-container>
+          </ng-container>
+
+
+          <!-- actions Column -->
+          <!-- <ng-container matColumnDef="actions">
+            <mat-header-cell class="actions-cell" *matHeaderCellDef mat-sort-header></mat-header-cell>
+            <mat-cell class="actions-cell" *matCellDef="let row">
+              <span class="fury-mobile-label"></span>
+              <button type="button" mat-icon-button [matMenuTriggerFor]="actionsMenu" (click)="$event.stopPropagation()">
+                <mat-icon>more_horiz</mat-icon>
+              </button>
+
+              <mat-menu #actionsMenu="matMenu" yPosition="below" xPosition="before">
+                <button (click)="updateCompany(row)" mat-menu-item>
+                  <span>Actualizar</span>
+                </button>
+                <button (click)="deleteCompany(row)" mat-menu-item>
+                  <span>Borrar</span>
+                </button>
+              </mat-menu>
+            </mat-cell>
+          </ng-container> -->
+
+          <mat-header-row *matHeaderRowDef="visibleColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: visibleColumns;"
+                    class="clickable route-animations-elements"></mat-row>
+        </mat-table>
+
+        <mat-paginator class="paginator" [pageSize]="pageSize"></mat-paginator>
+
+      </fury-list>
+
+    </div>
+  </div>
+</div>

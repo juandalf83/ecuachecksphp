@@ -1,0 +1,79 @@
+<div>
+  <div class="title-query-box">Ingresa los datos para tu consulta:</div>
+  <div class="subtitle-query-box">Mientras más datos ingreses, más consultas se realizarán</div>
+  <div class="form-query-box">
+    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+      <mat-form-field color="primary" appearance="outline" fxFlex.gt-sm>
+        <mat-label>Tipo de documento</mat-label>
+        <mat-select [(ngModel)]="dataEvaluated.documentType">
+          <mat-option value="Cédula"> Cédula </mat-option>
+          <!-- <mat-option value="Ruc"> Ruc </mat-option> -->
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+      <mat-form-field color="primary" appearance="outline" fxFlex.gt-sm>
+        <mat-label>Documento</mat-label>
+        <input matInput [(ngModel)]="dataEvaluated.document" 
+          type="text" 
+        />
+      </mat-form-field>
+    </div>
+    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+      <mat-form-field color="primary" appearance="outline" fxFlex.gt-sm>
+        <mat-label>Apellidos</mat-label>
+        <input matInput [(ngModel)]="dataEvaluated.lastname" 
+          type="text" 
+        />
+      </mat-form-field>
+      <mat-form-field color="primary" appearance="outline" fxFlex.gt-sm>
+        <mat-label>Nombres</mat-label>
+        <input matInput [(ngModel)]="dataEvaluated.name" 
+          type="text" 
+        />
+      </mat-form-field>
+    </div>
+    <div>
+      <div class="label-input-query-box">Fecha de nacimiento</div>
+      <div fxLayout="row" fxLayoutGap.gt-sm="0px">
+        <mat-form-field color="primary" appearance="outline" fxFlex="33%">
+          <mat-label>Día</mat-label>
+          <input matInput [(ngModel)]="dataEvaluated.birthday.day"
+            (keypress)="validateOnlyNumbers($event)"
+            (blur)="validValue(dataEvaluated.birthday.day, 'day')"
+            max="31" 
+            type="text" 
+          />
+        </mat-form-field>
+        <mat-form-field color="primary" appearance="outline" fxFlex="33%">
+          <mat-label>Mes</mat-label>
+          <input matInput [(ngModel)]="dataEvaluated.birthday.month"
+            (keypress)="validateOnlyNumbers($event)"
+            (blur)="validValue(dataEvaluated.birthday.month, 'month')" 
+            type="text" 
+          />
+        </mat-form-field>
+        <mat-form-field color="primary" appearance="outline" fxFlex="33%">
+          <mat-label>Año</mat-label>
+          <input matInput [(ngModel)]="dataEvaluated.birthday.year"
+            (keypress)="validateOnlyNumbers($event)" 
+            (blur)="validValue(dataEvaluated.birthday.year, 'year')"
+            type="text" 
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+      <mat-checkbox color="primary" [(ngModel)]="authorize" fxFlex>
+        <span style="white-space: normal;font-size: 0.8em;">
+          Tengo la autorización del titular para acceder a la consulta
+        </span>
+      </mat-checkbox>
+    </div>
+  </div>
+  <div style="text-align: center; margin-top: 20px;">
+    <button type="button" color="primary" class="btn-blue" mat-raised-button [disabled]="!authorize" (click)="goSearch()">
+      Consultar
+    </button>
+  </div>
+</div>

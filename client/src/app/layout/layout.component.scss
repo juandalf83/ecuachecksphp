@@ -1,0 +1,161 @@
+@import "var";
+
+.container {
+  height: 100%;
+  position: relative;
+  background-color: #fff;
+}
+
+.content-container {
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.content-wrapper{
+  background: rgb(239,247,250);
+  background: linear-gradient(90deg, rgba(239,247,250,1) 0%, rgba(237,230,245,1) 100%);
+  width: 100%;
+}
+
+.content {
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  &.scroll-disabled {
+    overflow: hidden;
+
+    .content-inner {
+      min-height: 0;
+    }
+  }
+}
+
+/************************************************/
+.sidenav {
+  &.collapsed, &.collapsedHover {
+    & + .content-wrapper {
+      margin-left: $sidenav-collapsed-width;
+      max-width: calc(100% - #{$sidenav-collapsed-width} - #{$quickpanel-width});
+    }
+  }
+
+  &.expanded {
+    & + .content-wrapper {
+      max-width: calc(100% - #{$sidenav-width} - #{$quickpanel-width});
+    }
+  }
+
+  &.mobile, &.mobileOpen {
+    & + .content-wrapper {
+      max-width: 100%;
+    }
+  }
+}
+
+.disable-simplebar[data-simplebar] {
+
+  > .simplebar-scroll-content > .simplebar-content {
+    height: 100%;
+  }
+}
+
+.div-company{
+  width: 0px;
+  height: 100%;
+  background-color: rebeccapurple;
+  visibility: hidden;
+  animation-name: closediv;
+  animation-duration: 1s;
+  display: none;
+}
+
+.div-company-active{
+  width: $quickpanel-width;
+  height: 100%;
+  background-color: rebeccapurple;
+  visibility: visible;
+  animation-name: opendiv;
+  animation-duration: 1s;
+  display:block;
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+@keyframes opendiv {
+  from {width: 0px;visibility: hidden;}
+  to {width: $quickpanel-width;visibility: visible;}
+}
+
+@keyframes closediv {
+  from {width: $quickpanel-width;visibility: visible;}
+  to {width: 0px;visibility: hidden;}
+}
+
+/****register div*****/
+.register-container{
+  background-color: white;
+  // position: relative;
+}
+
+.register-header{
+  // height: 50px;
+  // min-height: 50px; 
+  // padding: 10px 10px 0px 10px;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
+
+.register-body{
+  padding: 0px 30px;
+  height: 100%;
+  margin-top: 38px;
+  overflow: hidden;
+}
+
+.register-footer{
+  // position: absolute;
+  // bottom: 0px;
+  width: 100%;
+  padding: 10px;
+  border-top: solid 1px #C7C6C7;
+  background-color: white;
+  font-size: 1.1em;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+// .overflow-container {
+//   min-height: 300px;
+//   overflow-x: hidden !important;
+//   position: absolute;
+//   width: 100%;
+//   position: relative;
+// }
+
+.cancel-button{
+  font-size: 1em;
+  color: $color-btn2 !important;
+  margin-right: 10px !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+
+.register-button{
+  font-size: 1em;
+  background-color: $color-btn2 !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+
+.subtitle-register{
+  font-size: 0.9em;
+}
+

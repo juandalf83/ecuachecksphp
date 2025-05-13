@@ -1,0 +1,11 @@
+@import "var";
+
+.alert{
+  position: absolute;
+  z-index: 1;
+  bottom: 5px;
+  right: 15px;
+  background-color: rgb(255 176 176);
+  color: #af2b2b;
+  padding: 10px;
+}

@@ -1,0 +1,122 @@
+<div>
+  <!-- <div fxHide fxShow.gt-sm> -->
+    <div class="head-row" fxHide fxShow.gt-sm>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div [fxFlex]="column.width" *ngFor="let column of header">{{column.title}}</div>
+      </div>
+    </div>
+    <div class="head-row" fxShow fxHide.gt-sm>
+      <div>{{titleMovil}}</div>
+    </div>
+    <div class="body-section">
+      <div *ngIf="data.length > 0">
+        <div *ngFor="let row of data; index as i;">
+          <div class="body-row" [ngStyle]="{'border-bottom': i < (data.length-1) ? 'solid 1px #37374e' : 'none'}">
+            <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="start center">
+              <div fxFlex [fxFlex.gt-sm]="column.width" *ngFor="let column of header" style="width: 100%;">
+                <div *ngIf="column.type === 'auto_increment'">
+                  <div fxLayout="row" fxLayoutGap.gt-sm="10px">
+                    <div fxFlex="35%" fxShow fxHide.gt-sm class="head-cell">{{column.title}}:</div>
+                    <div fxFlex>
+                      <div *ngIf="row[column.field] != ''">{{(i + 1)}}</div>
+                      <div *ngIf="row[column.field] == ''"> - </div>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="column.type === 'text'">
+                  <div fxLayout="row" fxLayoutGap.gt-sm="10px">
+                    <div fxFlex="35%" fxShow fxHide.gt-sm class="head-cell">{{column.title}}:</div>
+                    <div fxFlex>
+                      <div *ngIf="row[column.field] != ''" style="line-height: 15px;">{{row[column.field]}}</div>
+                      <div *ngIf="row[column.field] == ''"> - </div>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="column.type === 'text_action'">
+                  <div fxLayout="row" fxLayoutGap.gt-sm="10px">
+                    <div fxFlex="35%" fxShow fxHide.gt-sm class="head-cell">{{column.title}}:</div>
+                    <div fxFlex>
+                      <div *ngIf="row[column.field] != ''">
+                        <div style="display: flex; align-items: center;" *ngIf="row['status'] != 'running'">
+                          <span style="margin-right: 10px;">{{row[column.field]}}</span>
+                          <img height="20" [src]="column.icon" (click)="actionCellText(i, row)" style="cursor: pointer;"/>
+                        </div>
+                        <div *ngIf="row['status'] == 'running'">
+                          <div fxLayout="row">
+                            <div fxFlex="80%">
+                              <span style="margin-right: 10px;">Procesando...</span>
+                            </div>
+                            <div fxFlex>
+                              <mat-spinner style="width: 20px;height: 20px;"></mat-spinner>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div style="display: flex; align-items: center;" *ngIf="row[column.field] == ''"> - </div>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="column.type === 'alert'">
+                  <div fxLayout="row" fxLayoutGap.gt-sm="10px">
+                    <div fxFlex="35%" fxShow fxHide.gt-sm class="head-cell">{{column.title}}:</div>
+                    <div fxFlex>
+                      <div style="display: flex; align-items: center;" *ngIf="row[column.field] != ''">
+                        <div *ngFor="let types_alert of column.types_alerts">
+                          <div *ngIf="row[column.field] == types_alert.type">
+                            <span [ngStyle]="{color: types_alert.color }">{{row[column.field]}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div style="display: flex; align-items: center;" *ngIf="row[column.field] == ''"> - </div>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="column.type === 'array'">
+                  <div fxLayout="row" fxLayoutGap.gt-sm="10px">
+                    <div fxFlex="35%" fxShow fxHide.gt-sm class="head-cell">{{column.title}}:</div>
+                    <div fxFlex>
+                      <div *ngIf="row[column.field].length > 0">
+                        <div *ngFor="let item of row[column.field]">
+                          <div *ngFor="let header of column.headerArray">
+                            <strong style="margin-right: 10px;line-height: 15px;">{{header.title}}</strong>
+                            <span style="margin-right: 10px;line-height: 15px;">{{item[header.field]}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div style="display: flex; align-items: center;" *ngIf="row[column.field].length == 0"> - </div>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="column.type === 'button'">
+                  <div fxLayout="row" fxLayoutGap.gt-sm="10px">
+                    <div fxFlex="35%" fxShow fxHide.gt-sm class="head-cell">{{column.title}}:</div>
+                    <div fxFlex>
+                      <div style="display: flex; align-items: center;" *ngIf="row[column.field] != ''">
+                        <button mat-button color="primary" class="btn-blue" *ngIf="column.text_button" (click)="actionCell(i, row)">
+                          {{column.text_button}}
+                        </button>
+                        <div class="icons-action-result" *ngIf="column.icon_button" (click)="actionCell(i, row)">
+                          <img height="25" [src]="column.icon_button" />
+                        </div>
+                      </div>
+                      <div style="display: flex; align-items: center;" *ngIf="row[column.field] == ''"> - </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="data.length === 0">
+        <div class="body-row">
+          No se encontró resultados.
+        </div>
+      </div>
+    </div>
+  <!-- </div> -->
+
+  <!-- <div fxShow fxHide.gt-sm>
+    tabla movil
+  </div> -->
+</div>

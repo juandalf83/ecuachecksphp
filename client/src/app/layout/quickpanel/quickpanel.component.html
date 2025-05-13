@@ -1,0 +1,19 @@
+<fury-card class="quickpanel">
+  <div class="register-header">
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <button class="create" (click)="closeWindow()" type="button" class="btn-black" mat-mini-fab color="primary">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <fury-scrollbar class="overflow-container">
+    <ng-container #componentContainer></ng-container>
+  </fury-scrollbar>
+  <div class="register-footer" *ngIf="showFooter">
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <button mat-button color="primary" class="cancel-button" (click)="closeWindow()">Cancelar</button>
+      <button *ngIf="isCreateMode()" mat-raised-button color="primary" class="register-button" (click)="goSave()">Crear</button>
+      <button *ngIf="isUpdateMode()" mat-raised-button color="primary" class="register-button" (click)="goSave()">Actualizar</button>
+    </div>
+  </div>
+</fury-card>

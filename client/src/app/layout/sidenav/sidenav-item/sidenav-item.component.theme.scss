@@ -1,0 +1,83 @@
+.sidenav-item {
+  color: $sidenav-item-color;
+
+  .subheading {
+    color: $sidenav-item-subheading-color;
+    font-family: $sidenav-item-subheading-typography-font-family;
+  }
+
+  .sidenav-item-link {
+    color: #000;
+    font-family: $sidenav-item-typography-font-family;
+    font-size: $sidenav-item-typography-font-size;
+    font-weight: $sidenav-item-typography-font-weight;
+
+    &:hover {
+      background: #F3F1F1;
+      color: #6E6E6E;
+      // background: $sidenav-item-background-hover;
+      // color: $sidenav-item-color-hover;
+
+      .text-icon {
+        color: $sidenav-item-color-hover;
+      }
+    }
+
+    &.active {
+      // background: $sidenav-item-background-active;
+      // color: $sidenav-item-color-active;
+      background: $color-btn3;
+      color: #fff !important;
+
+      .text-icon {
+        color: #fff !important;
+      }
+    }
+
+    .text-icon {
+      color: #000;
+    }
+  }
+
+  &.level-0 {
+    &.dropdown-open {
+      background: $sidenav-item-dropdown-level1;
+
+      > .sidenav-item-link {
+        color: $sidenav-item-color-hover;
+      }
+    }
+  }
+
+  &.level-1 {
+    background: $sidenav-item-dropdown-level1;
+
+    .sidenav-item-link {
+      padding-left: $sidenav-item-padding-left-level1;
+    }
+  }
+
+  &.level-2 {
+    background: $sidenav-item-dropdown-level2;
+
+    .sidenav-item-link {
+      padding-left: $sidenav-item-padding-left-level2;
+    }
+  }
+
+  &.level-3 {
+    background: $sidenav-item-dropdown-level3;
+
+    .sidenav-item-link {
+      padding-left: $sidenav-item-padding-left-level3;
+    }
+  }
+
+  &.level-4 {
+    background: $sidenav-item-dropdown-level4;
+
+    .sidenav-item-link {
+      padding-left: $sidenav-item-padding-left-level4;
+    }
+  }
+}

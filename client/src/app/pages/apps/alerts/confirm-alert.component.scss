@@ -1,0 +1,47 @@
+.padding-section{
+  padding: 40px 20px 0px 20px;
+}
+
+.btn-update{
+  padding: 5px;
+  width: 120px;
+  background-color: #232323 !important;
+  color: #fff;
+}
+
+.btn-update:hover{
+  background-color: rgb(119, 119, 119) !important;
+}
+
+.btn-back{
+  padding: 5px;
+  width: 120px;
+  border-color: #232323 !important;
+  color: #232323 !important;
+}
+
+.btn-back:hover{
+  color: rgb(119, 119, 119);
+}
+
+@media screen and (min-width: 481px) and (max-width: 959px) {
+  .padding-section {
+    padding: 40px 20px 0px 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .padding-section {
+    padding: 40px 20px 0px 20px;
+  }
+
+  .btn-update{
+      width: 100%;
+      margin-left: 0px !important;
+      margin-top: 10px;
+  }
+
+  .btn-back{
+      width: 100%;
+  }
+}

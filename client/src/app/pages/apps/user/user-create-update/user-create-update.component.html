@@ -1,0 +1,86 @@
+<div class="register-container">
+  <div class="register-body">
+    <form [formGroup]="form" (ngSubmit)="save()" id="ngForm" #documentEditForm="ngForm">
+      <h2 mat-dialog-title>{{titlePanel}}</h2>
+      <h4 class="subtitle-register">Ingrese la información del usuario</h4>
+      
+      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+        <!-- <mat-form-field appearance="outline" fxFlex>
+          <mat-label>E-mail</mat-label>
+          <input type="text" formControlName="email" matInput>
+        </mat-form-field> -->
+        <mat-form-field fxFlex="grow" appearance="outline">
+          <mat-label>Correo electrónico</mat-label>
+          <input matInput required formControlName="email" (blur)="validEmail($event.target.value)" [errorStateMatcher]="matcherEmail">
+          <mat-error *ngIf="isEmailErr">{{emailErr}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px" style="margin-bottom: 10px;">
+        <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Teléfono</mat-label>
+          <input type="text" formControlName="phone" matInput>
+          <mat-hint>El número debe llevar el codigo de área, ejemplo +5939XXXXXXXXX</mat-hint>
+        </mat-form-field>
+      </div> -->
+      <div style="margin-bottom: 5px;">
+        <div fxFlex="1 1 auto">
+          <mat-form-field color="primary" appearance="outline" style="width: 70px;">
+            <input matInput formControlName="prefixPhone" type="text">
+          </mat-form-field>
+        </div>
+        <div fxFlex="9 1 auto">
+          <mat-form-field color="primary" appearance="outline" fxFlex="grow">
+            <mat-label>Teléfono de contacto</mat-label>
+            <input matInput formControlName="phone" type="text" maxlength="9" 
+              (keypress)="($event.charCode >= 48 && $event.charCode < 58)" 
+              (blur)="validNumber()"
+              [errorStateMatcher]="matcherPhone"
+            >
+            <mat-hint *ngIf="!isPhoneErr">El numero debe tener la siguiente estructura 999097611</mat-hint>
+            <mat-error *ngIf="isPhoneErr">{{phoneErr}}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">  
+        <mat-form-field appearance="outline" fxFlex>
+            <mat-label>Tipo usuario</mat-label>
+            <mat-select formControlName="rol_id">
+              <mat-option *ngFor="let rol of rolesJSONData" [value]="rol.id"> 
+                {{rol.name}} 
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+      </div>
+      <div class="title-pass" fxLayout.gt-sm='row' fxLayout.xs="column" *ngIf="isChangePass && mode === 'update'">
+        <div fxFlex="90%">Cambiar contraseña?</div>
+        <div fxFlex="10%" fxLayoutAlign="end">
+          <mat-slide-toggle formControlName="active_pass"></mat-slide-toggle>
+        </div>
+      </div>
+      <div *ngIf="form.value.active_pass">
+        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+          <mat-form-field appearance="outline" fxFlex>
+            <mat-label>Contraseña</mat-label>
+            <input [type]="inputType.password.type" formControlName="password" maxlength="50" matInput>
+            <button type="button" mat-icon-button matSuffix (click)="toggleVisibility('password')" matTooltip="Visualizar">
+              <mat-icon *ngIf="inputType.password.visible">visibility</mat-icon>
+              <mat-icon *ngIf="!inputType.password.visible">visibility_off</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+          <mat-form-field appearance="outline" fxFlex>
+            <mat-label>Confirmar Contraseña</mat-label>
+            <input [type]="inputType.confirm_password.type" formControlName="confirm_password" maxlength="50" matInput>
+            <button type="button" mat-icon-button matSuffix (click)="toggleVisibility('confirm_password')" matTooltip="Visualizar">
+              <mat-icon *ngIf="inputType.confirm_password.visible">visibility</mat-icon>
+              <mat-icon *ngIf="!inputType.confirm_password.visible">visibility_off</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

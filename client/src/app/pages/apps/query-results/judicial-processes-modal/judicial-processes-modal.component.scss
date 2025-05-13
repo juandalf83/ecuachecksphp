@@ -1,0 +1,36 @@
+@import "var";
+
+.clickable {
+  cursor: pointer;
+}
+
+.head-row{
+  background-color: #37374e;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 0.8em;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.body-section{
+  border: solid 1px #37374e;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.body-row{
+  padding: 15px 20px;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+
+.icons-action-result{
+  display: flex; 
+  align-items: center;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 480px) {
+
+}

@@ -1,0 +1,88 @@
+<div class="dashboard">
+  <fury-header-plan></fury-header-plan>
+  <div class="padding container-box">
+    <div class="header-box">
+      <div class="title-box">Mi cuenta</div>
+      <!-- <div class="subtitle-box">Gestiona los usuarios para tu equipo de trabajo.</div> -->
+    </div>
+    <div style="margin-bottom: 30px;">
+      <div class="card border-radius">
+        <div style="max-width: 500px;margin: 0 auto;">
+          <div class="padding" fxLayout="column" fxLayoutGap="16px" [formGroup]="form">
+            <div fxFlex="auto" fxLayout="column">
+              <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+                <mat-form-field fxFlex="grow" appearance="outline">
+                  <mat-label>Correo electrónico</mat-label>
+                  <input matInput required formControlName="email">
+                  <mat-error *ngIf="isEmailErr">{{emailErr}}</mat-error>
+                </mat-form-field>
+              </div>
+              <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+                <mat-form-field appearance="outline" fxFlex>
+                  <mat-label>Nombre empresa</mat-label>
+                  <input type="text" formControlName="company_name" matInput 
+                    (keyup)="onKey($event.target.value, 'company_name')"
+                    (blur)="validCompanyName()"
+                    [errorStateMatcher]="matcherCompanny"
+                  >
+                  <mat-error *ngIf="isCompanyErr">{{companyErr}}</mat-error>
+                </mat-form-field>
+              </div>
+              <div style="margin-bottom: 5px;">
+                <div fxFlex="1 1 auto">
+                  <mat-form-field color="primary" appearance="outline" style="width: 70px;">
+                    <input matInput formControlName="prefixPhone" type="text">
+                  </mat-form-field>
+                </div>
+                <div fxFlex="9 1 auto">
+                  <mat-form-field color="primary" appearance="outline" fxFlex="grow">
+                    <mat-label>Teléfono de contacto</mat-label>
+                    <input matInput formControlName="phone" type="text" maxlength="9" 
+                      (keypress)="($event.charCode >= 48 && $event.charCode < 58)" 
+                      (blur)="validNumber()"
+                      [errorStateMatcher]="matcherPhone"
+                    >
+                    <mat-hint *ngIf="!isPhoneErr">El numero debe tener la siguiente estructura 999097611</mat-hint>
+                    <mat-error *ngIf="isPhoneErr">{{phoneErr}}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="title-pass" fxLayout='row'>
+                <div fxFlex="80%">Cambiar contraseña?</div>
+                <div fxFlex="20%" fxLayoutAlign="end">
+                  <mat-slide-toggle formControlName="active_pass"></mat-slide-toggle>
+                </div>
+              </div>
+              <div *ngIf="form.value.active_pass">
+                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+                  <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Contraseña</mat-label>
+                    <input [type]="inputType.password.type" formControlName="password" maxlength="50" matInput>
+                    <button type="button" mat-icon-button matSuffix (click)="toggleVisibility('password')" matTooltip="Visualizar">
+                      <mat-icon *ngIf="inputType.password.visible">visibility</mat-icon>
+                      <mat-icon *ngIf="!inputType.password.visible">visibility_off</mat-icon>
+                    </button>
+                  </mat-form-field>
+                </div>
+                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+                  <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Confirmar Contraseña</mat-label>
+                    <input [type]="inputType.confirm_password.type" formControlName="confirm_password" maxlength="50" matInput>
+                    <button type="button" mat-icon-button matSuffix (click)="toggleVisibility('confirm_password')" matTooltip="Visualizar">
+                      <mat-icon *ngIf="inputType.confirm_password.visible">visibility</mat-icon>
+                      <mat-icon *ngIf="!inputType.confirm_password.visible">visibility_off</mat-icon>
+                    </button>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+      
+            <button type="button" color="primary" class="btn-blue" mat-raised-button [disabled]="blockButtton" (click)="save()">
+              Guardar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

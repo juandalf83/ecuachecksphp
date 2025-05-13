@@ -1,0 +1,50 @@
+<div class="dashboard">
+  <fury-header-plan></fury-header-plan>
+  <div class="padding container-box">
+    <div class="header-box">
+      <div class="title-box">Sistema de reglas</div>
+      <div class="subtitle-box" *ngIf="userLogger.rol_id != 1">
+        Ahorra tiempo en la interpretación de tus reportes, configura las reglas de asignación de novedades y agiliza aún más tu proceso de revisión de antecedentes.
+      </div>
+    </div>
+    <div style="width: 100%;background-color: #fff; border-radius: 15px; padding: 20px 40px;">
+      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px" style="margin-bottom: 20px;">
+        <div fxFlex style="border-bottom: solid 1px black;">
+          <div fxLayout="row" fxLayoutGap.gt-sm="10px" style="height: 100%;">
+            <div fxFlex 
+              *ngFor="let option of optionsTab; index as i;"
+              [ngClass]="option.css"
+              (click)="selectTab(i)"
+            >
+              {{option.title}}
+            </div>
+          </div>
+        </div>
+        <div fxFlex fxFlex.gt-sm="15%">
+          <button type="button" color="primary" class="btn-blue" mat-raised-button (click)="save()">
+            Aplicar cambios
+          </button>
+        </div>
+        <div fxFlex fxFlex.gt-sm="10%" *ngIf="userLogger.rol_id != 1">
+          <button type="button" color="primary" class="btn-stroked-blue" mat-stroked-button (click)="restart()">
+            {{titleRestart}}
+          </button>
+        </div>
+      </div>
+      <div *ngIf="optionsTab[0].active" style="margin-bottom: 50px;">
+        <div *ngFor="let rule of rules">
+          <div *ngIf="rule.items">
+            <fury-table-rules
+              [title]="rule.name"
+              [data]="rule.items"
+              (functionCell)="actionChecks($event)"
+            ></fury-table-rules>
+          </div> 
+        </div>
+      </div>
+      <!-- <div *ngIf="optionsTab[1].active">
+        DIV DOS
+      </div> -->
+    </div>
+  </div>
+</div>

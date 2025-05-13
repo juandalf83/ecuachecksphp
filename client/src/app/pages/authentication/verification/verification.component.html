@@ -1,0 +1,28 @@
+<div class="verification-completed">
+  <div class="box-verification-completed">
+    <div fxLayout="row" fxLayoutAlign="start center" class="text-gt">
+      <img style="height: 25px; width: 25px;" src="assets/img/logo-ecuachecks-icono.svg"> 
+      <img style="height: 18px; margin-left: 10px;" src="assets/img/logo-ecuachecks-letras.svg">
+    </div>
+    <div class="padding">
+      <mat-divider></mat-divider>
+    </div>
+    <div class="padding-verification-completed" style="font-size: 2.2em;font-weight: bold;line-height: 1.2;">
+      Valida tu cuenta antes de comenzar
+    </div>
+    <div class="padding-verification-completed">
+      <p style="font-size: 1.1em;" *ngIf="user.email">
+        Correo a validar <strong> {{user.email}}</strong>.
+      </p>
+      <!-- <p style="font-size: 1.1em;">
+        Por favor, si no recibiste en bandeja de entrada, 
+        revisar tu bandeja de spam
+      </p> -->
+    </div>
+    <div class="padding-verification-completed">
+      <button type="button" color="primary" class="btn-blue" mat-raised-button (click)="activeUser()">
+        Validar correo electronico
+      </button>
+    </div>
+  </div>
+</div>

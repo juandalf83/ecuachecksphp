@@ -1,0 +1,60 @@
+<div *ngIf="register.length > 0">
+  <div class="body-section">
+    <div class="head-row-rules" fxHide fxShow.gt-sm>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex style="padding: 10px 20px;">{{title}}</div>
+        <div fxFlex fxFlex.gt-sm="10%" 
+          *ngFor="let item of optionsRules"
+          [ngStyle]="{'background-color': item.background, color: item.color}"
+          style="padding: 10px;text-align: center;"
+        >
+          {{item.name}}
+        </div>
+      </div>
+    </div>
+    <div class="head-row-rules-movil" fxShow fxHide.gt-sm>
+      <div>{{title}}</div>
+    </div>
+    <div >
+      <div *ngFor="let row of register; index as indexRow;">
+        <div class="body-row">
+          <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="start center">
+            <div fxFlex style="padding: 0px 20px; width: 100%;"
+              [ngStyle]="{
+                'background-color': row['alert'] == undefined ? '#efefef' : 'none',
+                'font-weight': row['alert'] == undefined ? 'bold' : '',
+              }"
+            >
+              <div>{{row['consultations_items_name']}}</div>
+            </div>
+            <div fxFlex fxFlex.gt-sm="10%"
+              *ngFor="let item of optionsRules; index as indexColumn;"
+              [ngStyle]="{'background-color': item.background, color: item.color}"
+              style="width: 70%;"
+            >
+              <div fxLayout="row" fxLayoutGap.gt-sm="10px">
+                <div fxFlex fxShow fxHide.gt-sm class="head-cell-rule" *ngIf="row[item.field] != undefined">{{item.name}}:</div>
+                <div fxHide fxShow.gt-sm *ngIf="row[item.field] == undefined">
+                  <div class="check-rule">
+                    <mat-icon *ngIf="row[item.field] == undefined" ></mat-icon>
+                  </div>
+                </div>
+                <div fxFlex [ngStyle]="{'padding-bottom': indexRow == (register.length-1) ? '10px' : '0px'}" *ngIf="row[item.field] != undefined">
+                  <div (click)="actionCell(item.field, row)" class="check-rule">
+                    <mat-icon *ngIf="row[item.field] == true" style="background-color: #fff;">check</mat-icon>
+                    <mat-icon *ngIf="row[item.field] == false" style="background-color: #fff;"></mat-icon>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="register.length === 0">
+      <div class="body-row">
+        No se encontró resultados.
+      </div>
+    </div>
+  </div>
+</div>

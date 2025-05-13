@@ -1,0 +1,9 @@
+{
+    "require": {
+        "slim/slim": ">=3.0",
+        "slim/psr7": "dev-master",
+        "twilio/sdk": ">=6.39",
+        "phpoffice/phpspreadsheet": ">=1.25",
+        "selective/basepath": "^2.2"
+    }
+}

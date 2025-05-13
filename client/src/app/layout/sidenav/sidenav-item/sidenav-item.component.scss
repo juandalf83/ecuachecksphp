@@ -1,0 +1,155 @@
+@use 'sass:math';
+@import "var";
+@import "../../../../styles/icons/style.css";
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+:host {
+  display: block;
+}
+
+.sidenav-item {
+  transition: background-color $swift-ease-out-duration $swift-ease-out-timing-function;
+}
+
+.subheading {
+  font: var(--font-caption);
+  margin-left: $sidenav-item-padding-left + 2px;
+  margin-top: $spacing;
+  margin-bottom: 8px;
+  font-weight: 500;
+  transition: 300ms cubic-bezier(.25, .8, .25, 1);
+  white-space: nowrap;
+
+  &.first-subheading {
+    margin-top: 8px;
+    margin-bottom: 6px;
+  }
+}
+
+.sidenav-item-link {
+  height: 39.60px;
+  padding-left: 10px;
+  padding-right: $sidenav-item-padding-right;
+  padding-top: 15px;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  white-space: nowrap;
+  text-decoration: none;
+  border-radius: 30px 0px 0px 30px;
+  // border-top-right-radius: math.div($sidenav-item-height, 2);
+  // border-bottom-right-radius: math.div($sidenav-item-height, 2);
+  // margin-right: $sidenav-item-margin-right;
+  margin-left: 8px;
+  transition: background-color $swift-ease-out-duration $swift-ease-out-timing-function;
+
+  .icon {
+    width: $sidenav-item-icon-size;
+    height: $sidenav-item-icon-size;
+    font-size: $sidenav-item-icon-size;
+    line-height: $sidenav-item-icon-size;
+    flex: 0 0 auto;
+  }
+
+  .text-icon {
+    width: $sidenav-item-icon-size;
+    height: $sidenav-item-icon-size;
+    line-height: $sidenav-item-icon-size;
+    text-align: center;
+  }
+
+  .name {
+    padding-left: 14px;
+    font-size: 0.9em;
+  }
+
+  .badge {
+    padding: math.div($spacing, 12) math.div($spacing, 3);
+    font-size: 12px;
+    border-radius: 12px;
+
+    & + .expand-indicator {
+      margin-left: 8px;
+    }
+  }
+
+  .expand-indicator {
+    transition: transform .25s cubic-bezier(.35, 0, .25, 1);
+
+    &.rotate {
+      transform: rotate(-180deg);
+    }
+  }
+
+  .name, .badge, .expand-indicator {
+    will-change: opacity;
+  }
+}
+
+.dropdown {
+  position: relative;
+  overflow: hidden;
+}
+
+.position-item-footer{
+  position: absolute;
+  bottom: 45px;
+  max-width: 92% !important;
+  will-change: width;
+}
+
+.position-item-footer1{
+  position: absolute;
+  bottom: 5px;
+  max-width: 92% !important;
+}
+
+.position-item-footer2{
+  position: absolute;
+  bottom: 85px;
+  max-width: 92% !important;
+}
+
+.position-item-footer3{
+  position: absolute;
+  bottom: 125px;
+  max-width: 92% !important;
+}
+
+.style-companies{
+  width: 99%;
+  border-radius: 10px 10px 10px 10px !important;
+  padding-top: 10px;
+}
+
+::ng-deep .tooltip-menu{
+  // background: #F3F1F1 !important;
+  // color: #6E6E6E !important;
+  --mdc-plain-tooltip-container-color: #F3F1F1;
+  --mdc-plain-tooltip-supporting-text-color: #6E6E6E;
+}
+
+::ng-deep .tooltip-menu-active{
+  // background: $color-btn3 !important;
+  // color: #fff !important;
+  --mdc-plain-tooltip-container-color: #43526E;
+  --mdc-plain-tooltip-supporting-text-color: #fff;
+}

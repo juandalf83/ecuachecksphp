@@ -1,0 +1,85 @@
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+  <div fxFlex.gt-md="50%" fxFlex fxShow.gt-sm>
+    <img src="assets/img/imagen-login.svg" height="100%">
+  </div>
+  <div fxFlex.gt-md="50%" fxFlex>
+    <div class="card border-radius">
+      <div style="padding-right: 24px; margin-bottom: 70px;">
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+          <div fxFlex="50%">
+            <div class="text-header">¿No tienes cuenta?</div>
+          </div>
+          <div fxFlex="50%">
+            <button type="button" color="accent" class="btn-green" mat-raised-button (click)="goRegister()">
+              Inicia tu prueba gratis
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="header" fxLayout="column" fxLayoutAlign="start start">
+        <div fxLayout="row" fxLayoutAlign="start center" class="text-gt">
+          <img style="height: 25px; width: 25px;" src="assets/img/logo-ecuachecks-icono.svg"> 
+          <img style="height: 18px; margin-left: 10px;" src="assets/img/logo-ecuachecks-letras.svg">
+        </div>
+      </div>
+      <div class="padding">
+        <mat-divider></mat-divider>
+      </div>
+      <div *ngIf="!isSendPassword">
+        <div class="text-inicio">Inicia sesión</div>
+        <div class="text-welcome">
+          ¡Hola de nuevo!, Ingresa tus credenciales.
+        </div>
+        <div class="padding" fxLayout="column" fxLayoutGap="16px" [formGroup]="form">
+          <div fxFlex="auto" fxLayout="column">
+            <mat-form-field fxFlex="grow" appearance="outline">
+              <mat-label>Correo electrónico</mat-label>
+              <input matInput required formControlName="email" (blur)="validEmail($event.target.value, 'login')" [errorStateMatcher]="matcherEmail1">
+              <mat-error *ngIf="structureForm.login.isEmailErr">{{structureForm.login.emailErr}}</mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex="grow" appearance="outline">
+              <mat-label>Contraseña</mat-label>
+              <input matInput [type]="inputType" formControlName="password" (keyup.enter)="send()" required>
+              <button type="button" mat-icon-button matSuffix (click)="toggleVisibility()" matTooltip="Toggle Visibility">
+                <mat-icon *ngIf="visible">visibility</mat-icon>
+                <mat-icon *ngIf="!visible">visibility_off</mat-icon>
+              </button>
+              <!-- <mat-hint>Click en el ojo para visualizar la contraseña</mat-hint> -->
+              <mat-error *ngIf="form.get('password').hasError('required')">Necesitamos una contraseña para ingresar</mat-error>
+            </mat-form-field>
+          </div>
+    
+          <button type="button" color="primary" class="btn-blue" mat-raised-button [disabled]="structureForm.login.blockButtton" (click)="send()">
+            Iniciar sesión
+          </button>
+        </div>
+        <div>
+          <div class="request-password" (click)="showSendPassword()">¿Olvidaste tu contraseña?</div>
+        </div>
+      </div>
+      <div *ngIf="isSendPassword">
+        <div class="text-welcome">
+          Ingresa tu número de cédula por favor:
+        </div>
+        <div class="padding" fxLayout="column" fxLayoutGap="16px">
+          <div fxFlex="auto" fxLayout="column">
+            <mat-form-field fxFlex="grow" appearance="outline">
+              <mat-label>Correo electrónico</mat-label>
+              <input matInput required [(ngModel)]="email" (blur)="validEmail($event.target.value, 'reset')" [errorStateMatcher]="matcherEmail2">
+              <mat-error *ngIf="structureForm.reset.isEmailErr">{{structureForm.reset.emailErr}}</mat-error>
+            </mat-form-field>
+          </div>
+          <button type="button" color="primary" class="btn-blue" [disabled]="structureForm.reset.blockButtton" mat-raised-button (click)="sendPassword()">
+            Solicitar envio de contraseña
+          </button>
+        </div>
+        <div>
+          <div class="request-password" (click)="showSendPassword()">Regresar a inicio de sesión</div>
+        </div>
+      </div>
+      <div style="text-align: center;">
+        <p>Todos los derechos reservados. Grupo Toledo {{year}}</p>
+      </div>
+    </div>
+  </div>
+</div>

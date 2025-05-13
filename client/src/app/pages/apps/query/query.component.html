@@ -1,0 +1,127 @@
+<div class="dashboard">
+  <fury-header-plan></fury-header-plan>
+  <div class="padding container-box">
+    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px" style="width: 100%;margin-bottom: 100px;" *ngIf="!showCharge">
+      <div fxFlex fxFlex.gt-sm="40%">
+        <mat-card [class.mat-elevation-z6]="true" style="min-height: 60vh;">
+          <mat-card-content>
+            <fury-form-query 
+              [dataEvaluated]="dataEvaluated"
+              (search)="search()"
+            ></fury-form-query>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div fxFlex fxHide fxFlex.gt-sm></div>
+      <div fxFlex fxHide fxShow.gt-sm></div>
+    </div>
+    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px" style="width: 100%;" *ngIf="showCharge">
+      <div fxFlex.gt-sm="250px" style="margin-bottom: 20px;">
+        <mat-card [class.mat-elevation-z6]="true" style="min-height: 60vh;">
+          <mat-card-content>
+            <div class="title-query-box">Información general de la consulta</div>
+            <div class="form-query-box" style="margin-top: 33px;">
+              <div class="item-query-box">
+                <div class="label-query-box">Tiempo de consulta:</div>
+                <div class="value-query-box">{{queryMinutesShow}}:{{querySecondsShow}}</div>
+              </div>
+              <div class="item-query-box">
+                <div class="label-query-box">Tipo:</div>
+                <div class="value-query-box">{{dataEvaluated.documentType}}</div>
+              </div>
+              <div class="item-query-box">
+                <div class="label-query-box">Datos personales:</div>
+                <div class="value-query-box">
+                  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                    <div fxFlex="30%">Nombre:</div>
+                    <div fxFlex *ngIf="resultQuery.name" style="font-size: 0.9em;line-height: 15px;">{{resultQuery.name}}</div>
+                    <div fxFlex *ngIf="!resultQuery.name">
+                      <mat-progress-bar mode="buffer"></mat-progress-bar>
+                    </div>
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                    <div fxFlex="30%">Documento:</div>
+                    <div fxFlex *ngIf="resultQuery.document">{{resultQuery.document}}</div>
+                    <div fxFlex *ngIf="!resultQuery.document">
+                      <mat-progress-bar mode="buffer"></mat-progress-bar>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item-query-box1">
+                <div class="label-query-box">Fecha de consulta:</div>
+                <div class="value-query-box">{{currentDate}}</div>
+              </div>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+              <button type="button" color="primary" class="btn-blue" mat-raised-button (click)="downloadPDF()" style="margin-bottom: 10px">
+                Descargar PDF
+              </button>
+              <button type="button" color="primary" class="btn-blue-stroke" mat-stroked-button (click)="back()">
+                Realizar otra consulta              
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div fxFlex.gt-sm="250px"  style="margin-bottom: 20px;" *ngIf="!showQuery">
+        <mat-card [class.mat-elevation-z6]="true" style="min-height: 60vh; height: 100%;">
+          <mat-card-content>
+            <div class="div-charge">
+              <div>
+                <div class="title-query-box" style="margin-bottom: 30px;">
+                  Estamos consultando...
+                </div>
+                <div class="spinner-charge">
+                  <div>
+                    <mat-spinner
+                      mode="determinate"
+                      diameter="150"
+                      strokeWidth="5"
+                      [value]="charge"
+                      aria-label="Rating"
+                    ></mat-spinner>
+                    <div class="text-spinner">{{charge}}%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div fxFlex.gt-sm="250px"  style="margin-bottom: 20px;" *ngIf="showQuery">
+        <mat-card [class.mat-elevation-z6]="true" style="min-height: 60vh; height: 100%;">
+          <mat-card-content>
+            <div class="title-query-box">Bases de datos consultadas</div>
+            <div class="subtitle-query-box">Clic en la consulta para ver detalle</div>
+            <div class="form-query-box">
+              <button 
+                *ngFor="let option of optionsQuery"
+                type="button" 
+                color="primary" 
+                [class]="option.css"
+                [class.spinner]="option.loading" 
+                [disabled]="option.disabled" 
+                mat-stroked-button 
+                style="margin-bottom: 10px;text-align: left;"
+                (click)="selectOption(option)"
+              >
+                {{option.name}}              
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div fxFlex.gt-sm style="margin-bottom: 20px;" *ngIf="showQuery">
+        <mat-card [class.mat-elevation-z6]="true" style="min-height: 60vh; height: 100%;" *ngIf="optionSelect">
+          <mat-card-content>
+            <fury-results-query
+              [option]="optionSelect"
+              [resultOption]="resultQuery"
+            ></fury-results-query>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

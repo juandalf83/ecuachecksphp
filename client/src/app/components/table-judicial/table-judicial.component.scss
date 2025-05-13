@@ -1,0 +1,41 @@
+@import 'var';
+
+.body-row-header{
+  background-color: #f7f6f6;
+  padding: 10px 20px;
+  font-size: 0.8em;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.body-section{
+  border: solid 1px $color-btn3;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.body-row{
+  padding: 8px 20px;
+  font-size: 0.8em;
+}
+
+.head-cell{
+  color: $color-btn3;
+  font-weight: bold;
+}
+
+.btn-blue{
+  background-color: #fff !important;
+  color: $color-btn3 !important;
+  font-size: 1em;
+}
+
+.btn-blue:hover{
+  color: $color-btn3h !important;
+}
+
+.icons-action-result{
+  display: flex; 
+  align-items: center;
+  cursor: pointer;
+}
