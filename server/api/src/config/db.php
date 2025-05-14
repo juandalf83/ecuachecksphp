@@ -15,10 +15,10 @@
 // }
 class DB {
     // private $dbHost = 'localhost';
-    private $dbHost = '23.145.120.242';
-    private $dbUser = 'ecuachec_user';
-    private $dbPass = 'b%_ihCZd]wNI';
-    private $dbName = 'ecuachec_prueba';
+    private $dbHost = '';
+    private $dbUser = 'user';
+    private $dbPass = 'pass';
+    private $dbName = 'base_name';
 
     public function conectionDB(){
         $mysqlConnet = "mysql:host=$this->dbHost;dbname=$this->dbName";
